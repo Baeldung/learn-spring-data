@@ -1,3 +1,5 @@
+**UPDATE**: The price of "Learn Spring Data" class will permanently change on the 13th of March.
+
 This is the codebase for the [Learn Spring Data](https://www.baeldung.com/learn-spring-data-course#master-class) course (work in progress). 
 
 ======
