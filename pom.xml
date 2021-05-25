@@ -13,8 +13,14 @@
     <modules>
         <module>spring-data-jpa-setup-start</module>
         <module>spring-data-jpa-setup-end</module>
+        <module>introduction-to-spring-data-jpa-repositories-start</module>
+        <module>introduction-to-spring-data-jpa-repositories-end</module>
         <module>testing-spring-data-repositories-start</module>
         <module>testing-spring-data-repositories-end</module>
+        <module>derived-query-methods-start</module>
+        <module>derived-query-methods-end</module>
+        <module>deep-dive-into-derived-query-methods-start</module>
+        <module>deep-dive-into-derived-query-methods-end</module>
     </modules>
 
 </project>
