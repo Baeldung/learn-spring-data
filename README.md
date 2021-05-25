@@ -1,4 +1,7 @@
-This is the codebase for the [Learn Spring Data](https://www.baeldung.com/learn-spring-data-course#master-class) course (work in progress). 
+# Module 2 - Spring Data Repositories
+
+This is the codebase for Module 2 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+
 
 ======
 
