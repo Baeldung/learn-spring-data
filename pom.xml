@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <description>The &quot;Learn Spring Data&quot; Course - Module 3: Spring Data Custom Queries</description>
+  <name>learn-spring-data-spring-data-custom-queries</name>
+
+  <groupId>com.baeldung</groupId>
+  <artifactId>learn-spring-data.spring-data-custom-queries</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>modifying-queries-lesson-start</module>
+    <module>modifying-queries-lesson-end</module>
+    <module>using-query-with-parameters-start</module>
+    <module>using-query-with-parameters-end</module>
+  </modules>
+
+</project>
