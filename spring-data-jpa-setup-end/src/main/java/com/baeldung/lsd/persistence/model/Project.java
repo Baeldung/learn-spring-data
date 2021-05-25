@@ -1,8 +1,8 @@
 package com.baeldung.lsd.persistence.model;
 
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,31 +20,23 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, updatable = false)
     private String code;
 
     private String name;
 
-    private LocalDate dateCreated;
+    private String description;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
-    private Set<Task> tasks;
+    @OneToMany(mappedBy = "project", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Task> tasks = new HashSet<>();
 
-    public Project(String name, String code, LocalDate dateCreated) {
-        this.name = name;
+    public Project(String code, String name, String description) {
         this.code = code;
-        this.dateCreated = dateCreated != null ? dateCreated : LocalDate.now();
+        this.name = name;
+        this.description = description;
     }
 
     public Project() {
-    }
-
-    public Project(Project project) {
-        this(project.getName(), project.getName(), null);
-        this.tasks = project.getTasks()
-            .stream()
-            .collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -72,12 +63,12 @@ public class Project {
         this.name = name;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Task> getTasks() {
@@ -90,11 +81,7 @@ public class Project {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((code == null) ? 0 : code.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+        return Objects.hashCode(code);
     }
 
     @Override
@@ -111,17 +98,12 @@ public class Project {
                 return false;
         } else if (!code.equals(other.code))
             return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Project [id=" + id + ", code=" + code + ", name=" + name + ", dateCreated=" + dateCreated + ", tasks=" + tasks +"]";
+        return "Project [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + "]";
     }
 
 }

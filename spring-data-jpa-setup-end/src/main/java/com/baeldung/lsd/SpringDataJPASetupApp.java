@@ -8,12 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LsdApp implements ApplicationRunner {
+public class SpringDataJPASetupApp implements ApplicationRunner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LsdApp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SpringDataJPASetupApp.class);
 
     public static void main(final String... args) {
-        SpringApplication.run(LsdApp.class, args);
+        SpringApplication.run(SpringDataJPASetupApp.class, args);
     }
 
     @Override

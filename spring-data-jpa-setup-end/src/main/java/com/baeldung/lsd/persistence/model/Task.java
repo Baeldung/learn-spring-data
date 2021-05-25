@@ -1,7 +1,10 @@
 package com.baeldung.lsd.persistence.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,46 +13,41 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true, nullable = false, updatable = false)
+    private String uuid = UUID.randomUUID()
+        .toString();
 
     private String name;
 
     private String description;
 
-    private LocalDate dateCreated;
-
     private LocalDate dueDate;
 
     private TaskStatus status;
-    
+
+    @ManyToOne(optional = false)
+    private Project project;
+
     @ManyToOne
     private User assignee;
 
     public Task() {
-        this.status = TaskStatus.TO_DO;
     }
 
-    public Task(String name, String description, LocalDate dateCreated, LocalDate dueDate) {
+    public Task(String name, String description, LocalDate dueDate, Project project, TaskStatus status) {
         this.name = name;
         this.description = description;
-        this.dateCreated = dateCreated;
-        this.dueDate = dueDate;
-        this.status = TaskStatus.TO_DO;
-    }
-
-    public Task(String name, String description, LocalDate dateCreated, LocalDate dueDate, TaskStatus status) {
-        this.name = name;
-        this.description = description;
-        this.dateCreated = dateCreated;
         this.dueDate = dueDate;
         this.status = status;
+        this.project = project;
     }
 
-    public Task(Task task) {
-        this(task.getName(), task.getDescription(), task.getDateCreated(), task.getDueDate());
+    public Task(String name, String description, LocalDate dueDate, Project project) {
+        this(name, description, dueDate, project, TaskStatus.TO_DO);
     }
 
     public Long getId() {
@@ -76,14 +74,6 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     public LocalDate getDueDate() {
         return dueDate;
     }
@@ -100,6 +90,14 @@ public class Task {
         this.status = status;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     public User getAssignee() {
         return assignee;
     }
@@ -108,12 +106,18 @@ public class Task {
         this.assignee = assignee;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    @Override
+    public String toString() {
+        return "Task [id=" + id + ", name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", status=" + status + ", project=" + project + ", assignee=" + assignee + "]";
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+        return Objects.hash(uuid);
     }
 
     @Override
@@ -125,17 +129,12 @@ public class Task {
         if (getClass() != obj.getClass())
             return false;
         Task other = (Task) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (uuid == null) {
+            if (other.uuid != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!uuid.equals(other.uuid))
             return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Task [id=" + id + ", name=" + name + ", description=" + description + ", dateCreated=" + dateCreated + ", dueDate=" + dueDate + ", status=" + status + ", assignee=" + assignee + "]";
     }
 
 }

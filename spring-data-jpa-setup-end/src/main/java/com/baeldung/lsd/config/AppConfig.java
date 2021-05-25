@@ -8,6 +8,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.baeldung.lsd.persistence.repository")
 @EntityScan("com.baeldung.lsd.persistence.model")
 public class AppConfig {
- 
-   
+
 }
