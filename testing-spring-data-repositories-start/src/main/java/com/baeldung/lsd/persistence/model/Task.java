@@ -2,6 +2,7 @@ package com.baeldung.lsd.persistence.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false, updatable = false)
+    private String uuid = UUID.randomUUID()
+        .toString();
+
     private String name;
 
     private String description;
@@ -102,6 +106,10 @@ public class Task {
         this.assignee = assignee;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
     @Override
     public String toString() {
         return "Task [id=" + id + ", name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", status=" + status + ", project=" + project + ", assignee=" + assignee + "]";
@@ -109,7 +117,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, project);
+        return Objects.hash(uuid);
     }
 
     @Override
@@ -121,15 +129,10 @@ public class Task {
         if (getClass() != obj.getClass())
             return false;
         Task other = (Task) obj;
-        if (name == null) {
-            if (other.name != null)
+        if (uuid == null) {
+            if (other.uuid != null)
                 return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (project == null) {
-            if (other.project != null)
-                return false;
-        } else if (!project.equals(other.project))
+        } else if (!uuid.equals(other.uuid))
             return false;
         return true;
     }

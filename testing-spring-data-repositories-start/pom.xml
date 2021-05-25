@@ -62,14 +62,6 @@
         </license>
     </licenses>
 
-    <developers>
-        <developer>
-            <email>eugen@baeldung.com</email>
-            <name>Eugen Paraschiv</name>
-            <url>https://github.com/eugenp</url>
-            <id>eugenp</id>
-        </developer>
-    </developers>
 
     <properties>
         <!-- non-dependencies -->

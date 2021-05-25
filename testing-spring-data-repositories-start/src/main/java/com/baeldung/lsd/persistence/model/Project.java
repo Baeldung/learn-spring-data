@@ -1,5 +1,6 @@
 package com.baeldung.lsd.persistence.model;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, updatable = false)
     private String code;
 
     private String name;
@@ -27,7 +28,7 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Task> tasks;
+    private Set<Task> tasks = new HashSet<>();
 
     public Project(String code, String name, String description) {
         this.code = code;
