@@ -11,10 +11,14 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>using-query-start</module>
+    <module>using-query-end</module>
     <module>modifying-queries-lesson-start</module>
     <module>modifying-queries-lesson-end</module>
     <module>using-query-with-parameters-start</module>
     <module>using-query-with-parameters-end</module>
+    <module>named-queries-start</module>
+    <module>named-queries-end</module>
   </modules>
 
 </project>
