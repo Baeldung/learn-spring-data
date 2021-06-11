@@ -21,6 +21,8 @@
         <module>derived-query-methods-end</module>
         <module>deep-dive-into-derived-query-methods-start</module>
         <module>deep-dive-into-derived-query-methods-end</module>
+        <module>save-delete-methods-start</module>
+        <module>save-delete-methods-end</module>
     </modules>
 
 </project>
