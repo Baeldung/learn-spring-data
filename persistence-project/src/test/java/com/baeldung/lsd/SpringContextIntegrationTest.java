@@ -7,6 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringContextIntegrationTest {
 
     @Test
-    public void whenContextIsLoaded_thenNoExceptions() {
+    void whenContextIsLoaded_thenNoExceptions() {
     }
 }
