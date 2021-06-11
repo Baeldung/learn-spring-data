@@ -20,19 +20,19 @@ import com.baeldung.lsd.persistence.model.User;
 // avoid running the DerivedQueryMethodsApp#run method
 @ContextConfiguration(classes = { DeepDiveDerivedQueryMethodsApp.class }, initializers = ConfigDataApplicationContextInitializer.class)
 @Transactional
-public class UserRepositoryIntegrationTest {
+class UserRepositoryIntegrationTest {
 
     @Autowired
     IUserRepository userRepository;
 
     @Test
-    public void givenNewUser_whenSaved_thenSuccess() {
+    void givenNewUser_whenSaved_thenSuccess() {
         User newUser = new User("johnTest1@test.com", "John", "Doe");
         assertThat(userRepository.save(newUser)).isNotNull();
     }
 
     @Test
-    public void givenUserCreated_whenFindById_thenSuccess() {
+    void givenUserCreated_whenFindById_thenSuccess() {
         User newUser = new User("johnTest2@test.com", "John", "Doe");
         assertThat(userRepository.save(newUser)).isNotNull();
 

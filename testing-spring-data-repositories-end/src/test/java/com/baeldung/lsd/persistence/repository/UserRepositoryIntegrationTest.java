@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import com.baeldung.lsd.persistence.model.User;
 
 @DataJpaTest
-public class UserRepositoryIntegrationTest {
+class UserRepositoryIntegrationTest {
 
     @Autowired
     IUserRepository userRepository;
@@ -21,13 +21,13 @@ public class UserRepositoryIntegrationTest {
     TestEntityManager entityManager;
 
     @Test
-    public void givenNewUser_whenSaved_thenSuccess() {
+    void givenNewUser_whenSaved_thenSuccess() {
         User newUser = new User("johnTest1@test.com", "John", "Doe");
         assertThat(userRepository.save(newUser)).isEqualTo(entityManager.find(User.class, newUser.getId()));
     }
 
     @Test
-    public void givenUserCreated_whenFindById_thenSuccess() {
+    void givenUserCreated_whenFindById_thenSuccess() {
         User newUser = new User("johnTest2@test.com", "John", "Doe");
         userRepository.save(newUser);
 

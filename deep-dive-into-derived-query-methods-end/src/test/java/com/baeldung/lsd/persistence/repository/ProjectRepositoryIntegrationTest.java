@@ -22,19 +22,19 @@ import com.baeldung.lsd.persistence.model.Project;
 // avoid running the DerivedQueryMethodsApp#run method
 @ContextConfiguration(classes = { DeepDiveDerivedQueryMethodsApp.class }, initializers = ConfigDataApplicationContextInitializer.class)
 @Transactional
-public class ProjectRepositoryIntegrationTest {
+class ProjectRepositoryIntegrationTest {
 
     @Autowired
     IProjectRepository projectRepository;
 
     @Test
-    public void givenNewProject_whenSaved_thenSuccess() {
+    void givenNewProject_whenSaved_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         assertNotNull(projectRepository.save(newProject));
     }
 
     @Test
-    public void givenProjectCreated_whenFindById_thenSuccess() {
+    void givenProjectCreated_whenFindById_thenSuccess() {
         Project newProject = new Project("PTEST-2", "Test Project 2", "Description for project PTEST-2");
         projectRepository.save(newProject);
 
@@ -43,7 +43,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByNameContaining_thenSuccess() {
+    void givenProjectCreated_whenFindByNameContaining_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
@@ -54,7 +54,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByName_thenSuccess() {
+    void givenProjectCreated_whenFindByName_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
@@ -65,7 +65,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByNameIsNot_thenHasValue() {
+    void givenProjectCreated_whenFindByNameIsNot_thenHasValue() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
@@ -76,7 +76,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByNameStartingWith_thenHasValue() {
+    void givenProjectCreated_whenFindByNameStartingWith_thenHasValue() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
@@ -87,7 +87,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByNameLike_thenHasValue() {
+    void givenProjectCreated_whenFindByNameLike_thenHasValue() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 

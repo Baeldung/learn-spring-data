@@ -11,13 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.baeldung.lsd.persistence.model.Project;
 
 @SpringBootTest
-public class ProjectRepositoryIntegrationTest {
+class ProjectRepositoryIntegrationTest {
 
     @Autowired
     IProjectRepository projectRepository;
 
     @Test
-    public void givenLoadedProjects_whenFindByID_thenSuccess() {
+    void givenLoadedProjects_whenFindByID_thenSuccess() {
         Optional<Project> savedProject = projectRepository.findById(1L);
         assertNotNull(savedProject.get());
     }

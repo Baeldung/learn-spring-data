@@ -22,19 +22,19 @@ import com.baeldung.lsd.persistence.model.Project;
 // avoid running the DerivedQueryMethodsApp#run method
 @ContextConfiguration(classes = { DerivedQueryMethodsApp.class }, initializers = ConfigDataApplicationContextInitializer.class)
 @Transactional
-public class ProjectRepositoryIntegrationTest {
+class ProjectRepositoryIntegrationTest {
 
     @Autowired
     IProjectRepository projectRepository;
 
     @Test
-    public void givenNewProject_whenSaved_thenSuccess() {
+    void givenNewProject_whenSaved_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         assertNotNull(projectRepository.save(newProject));
     }
 
     @Test
-    public void givenProjectCreated_whenFindById_thenSuccess() {
+    void givenProjectCreated_whenFindById_thenSuccess() {
         Project newProject = new Project("PTEST-2", "Test Project 2", "Description for project PTEST-2");
         projectRepository.save(newProject);
 
@@ -43,7 +43,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByCodeEquals_thenSuccess() {
+    void givenProjectCreated_whenFindByCodeEquals_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
@@ -53,12 +53,12 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenSingleProject_whenCount_returnsOne() {
+    void givenSingleProject_whenCount_returnsOne() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         projectRepository.save(newProject);
 
         int count = projectRepository.countByName("Test Project 1");
 
-        assertEquals(count, 1);
+        assertEquals(1,count);
     }
 }
