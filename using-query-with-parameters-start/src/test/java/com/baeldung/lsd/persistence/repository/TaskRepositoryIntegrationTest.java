@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-public class TaskRepositoryIntegrationTest {
+class TaskRepositoryIntegrationTest {
 
     @Autowired
     ITaskRepository taskRepository;
@@ -25,7 +25,7 @@ public class TaskRepositoryIntegrationTest {
     TestEntityManager entityManager;
 
     @Test
-    public void givenNewTask_whenSaved_thenSuccess() {
+    void givenNewTask_whenSaved_thenSuccess() {
         Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
         projectRepository.save(testProject);
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
@@ -36,7 +36,7 @@ public class TaskRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenTaskCreated_whenFindById_thenSuccess() {
+    void givenTaskCreated_whenFindById_thenSuccess() {
         Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
         projectRepository.save(testProject);
 

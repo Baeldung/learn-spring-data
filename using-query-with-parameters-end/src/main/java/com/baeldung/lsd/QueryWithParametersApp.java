@@ -37,13 +37,13 @@ public class QueryWithParametersApp implements ApplicationRunner {
         LOG.info("find Project 2 and Project 3 using IN clause:\n{}", projectList3);
 
         List<Project> projectList4 = projectRepository.findByDescriptionIsLike("About");
-        LOG.info("find Project 2 and Project 3 using LIKE clause:\n{}", projectList4);
+        LOG.info("find Projects containing 'About' using LIKE clause:\n{}", projectList4);
 
         List<Project> projectList5 = projectRepository.findByDescriptionWithPrefixAndSuffix("About", "3");
-        LOG.info("find Project 3 using LIKE clause:\n{}", projectList5);
+        LOG.info("find Project 3 using prefix and suffix in LIKE clause:\n{}", projectList5);
 
         List<Project> projectList6 = projectRepository.findByDescriptionIsShorterThan(16);
-        LOG.info("find Project 2 and Project 3 using Native query:\n{}", projectList6);
+        LOG.info("find Projects with short descriptions using Native query:\n{}", projectList6);
 
         List<Project> projectList7 = projectRepository.findByDescriptionWithPrefix("%");
         LOG.info("find all Projects by passing '%' to LIKE clause:\n{}", projectList7);

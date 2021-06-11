@@ -14,8 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
-import com.baeldung.lsd.persistence.repository.ITaskRepository;
-import com.baeldung.lsd.persistence.repository.IUserRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
+import com.baeldung.lsd.persistence.repository.UserRepository;
 
 @SpringBootApplication
 public class ModifyingQueriesApp implements ApplicationRunner {
@@ -23,10 +23,10 @@ public class ModifyingQueriesApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(ModifyingQueriesApp.class);
 
     @Autowired
-    private ITaskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(ModifyingQueriesApp.class, args);
@@ -36,20 +36,20 @@ public class ModifyingQueriesApp implements ApplicationRunner {
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
         int deletedRecords = taskRepository.deleteCompletedTasks();
-        LOG.info("Number of Records Deleted : {}", deletedRecords);
+        LOG.info("Number of Records Deleted :\n {}", deletedRecords);
 
         userRepository.addActiveColumn();
 
-        Optional<Task> taskOptional = taskRepository.findById(1l);
+        Optional<Task> taskOptional = taskRepository.findById(1L);
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
             task.setStatus(TaskStatus.DONE);
-            taskRepository.save(task);
-            int deletedCompletedRecords = taskRepository.deleteCompletedTasks();
-            LOG.info("Number of Records Deleted : {}", deletedCompletedRecords);
 
-            Optional<Task> taskCompleted = taskRepository.findById(1l);
-            LOG.info("Completed Task : {}", taskCompleted);
+            int deletedCompletedRecords = taskRepository.deleteCompletedTasks();
+            LOG.info("Number of Records Deleted :\n {}", deletedCompletedRecords);
+
+            Optional<Task> taskCompleted = taskRepository.findById(1L);
+            LOG.info("Completed Task :\n {}", taskCompleted);
         }
 
     }

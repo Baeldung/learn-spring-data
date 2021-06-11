@@ -32,7 +32,7 @@ public interface IProjectRepository extends CrudRepository<Project, Long> {
     @Query("select p from Project p where p.description like :prefix%")
     List<Project> findByDescriptionWithPrefix(@Param("prefix") String prefix);
 
-    @Query(value = "select * from Project p where LENGTH(p.description)< :length", nativeQuery = true)
+    @Query(value = "select * from Project p where LENGTH(p.description) < :length", nativeQuery = true)
     List<Project> findByDescriptionIsShorterThan(@Param("length") int len);
 
 }

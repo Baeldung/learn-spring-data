@@ -18,10 +18,10 @@ import com.baeldung.lsd.persistence.model.TaskStatus;
 class TaskRepositoryIntegrationTest {
 
     @Autowired
-    ITaskRepository taskRepository;
+    TaskRepository taskRepository;
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
