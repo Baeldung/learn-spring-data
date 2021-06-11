@@ -11,6 +11,14 @@
     <packaging>pom</packaging>
 
     <modules>
+       <module>pagination-and-sorting-support-lesson-start</module>
+       <module>pagination-and-sorting-support-lesson-end</module>
+       <module>sorting-lesson-start</module>
+       <module>sorting-lesson-end</module>
+       <module>pagination-lesson-start</module>
+       <module>pagination-lesson-end</module>
+       <module>pagination-in-controllers-lesson-start</module>
+       <module>pagination-in-controllers-lesson-end</module>
     </modules>
 
 </project>
