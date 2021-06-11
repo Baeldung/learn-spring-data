@@ -34,22 +34,28 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Iterable<Project> projects = projectRepository.findByNameStartingWith("Project");
-        projects.forEach((project) -> LOG.info("projects name starting with \"Project\": {}", project));
+        LOG.info("Projects name starting with \"Project\"\n{}", projects);
+
+        Iterable<Project> percentSignProjects = projectRepository.findByNameStartingWith("%");
+        LOG.info("Projects name starting with \"%\"\n{}", percentSignProjects);
+
+        Iterable<Project> allProjects = projectRepository.findByNameStartingWith("");
+        LOG.info("Projects name starting with \"\"\n{}", allProjects);
 
         List<Task> tasksStrictlyDue = taskRepository.findByDueDateGreaterThan(LocalDate.of(2025, 2, 10));
-        LOG.info("Number of Tasks due strictly after: \"2025-02-10\": {}", tasksStrictlyDue.size());
+        LOG.info("Number of Tasks due strictly after: \"2025-02-10\"\n{}", tasksStrictlyDue.size());
 
         List<Task> tasksDue = taskRepository.findByDueDateGreaterThanEqual(LocalDate.of(2025, 2, 10));
-        LOG.info("Number of Tasks due after: \"2025-02-10\": {}", tasksDue.size());
+        LOG.info("Number of Tasks due after: \"2025-02-10\"\n{}", tasksDue.size());
 
         List<Task> overdueTasks = taskRepository.findByDueDateBeforeAndStatusEquals(LocalDate.now(), TaskStatus.TO_DO);
-        LOG.info("Overdue Tasks: {}", overdueTasks);
+        LOG.info("Overdue Tasks:\n{}", overdueTasks);
 
         List<Task> tasksByAssignee = taskRepository.findByAssigneeFirstName("John");
-        LOG.info("Tasks assigned to John: {}", tasksByAssignee);
+        LOG.info("Tasks assigned to John\n{}", tasksByAssignee);
 
         Iterable<Project> distinctProjects = projectRepository.findDistinctByTasksNameContaining("Task");
-        distinctProjects.forEach((project) -> LOG.info("distinct projects with Task name containing \"Task\": {}", project));
+        LOG.info("Distinct projects with Task name containing \"Task\"\n{}", distinctProjects);
     }
 
 }

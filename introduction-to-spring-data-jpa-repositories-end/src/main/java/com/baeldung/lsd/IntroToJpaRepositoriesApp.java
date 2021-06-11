@@ -1,5 +1,7 @@
 package com.baeldung.lsd;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.repository.IProjectRepository;
 import com.baeldung.lsd.persistence.repository.ITaskRepository;
 import com.baeldung.lsd.persistence.repository.IUserRepository;
@@ -29,13 +33,13 @@ public class IntroToJpaRepositoriesApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        projectRepository.findAll()
-            .forEach(project -> LOG.info(project.toString()));
+        Iterable<Project> allProjects = projectRepository.findAll();
+        LOG.info("All Projects:\n{}", allProjects);
 
-        taskRepository.findById(1L)
-            .ifPresent(task -> LOG.info(task.toString()));
+        Optional<Task> project1 = taskRepository.findById(1L);
+        LOG.info("Task by id 1:\n{}", project1);
 
         long noOfUsers = userRepository.count();
-        LOG.info("number of users: {}", noOfUsers);
+        LOG.info("Number of users:\n{}", noOfUsers);
     }
 }

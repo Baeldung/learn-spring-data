@@ -31,10 +31,10 @@ public class DerivedQueryMethodsApp implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Optional<Project> project1 = projectRepository.findByCodeEquals("P1");
-        LOG.info("Project P1: {}", project1);
+        LOG.info("Project with code P1: \n{}", project1);
 
         int projectCount = projectRepository.countByName("Project 1");
-        LOG.info("Project 1 count: {}", projectCount);
+        LOG.info("Number of projects with name 'Project 1':\n{}", projectCount);
     }
 
 }
