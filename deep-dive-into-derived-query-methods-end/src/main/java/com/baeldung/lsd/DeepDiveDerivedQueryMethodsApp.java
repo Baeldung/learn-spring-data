@@ -34,13 +34,15 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Iterable<Project> projects = projectRepository.findByNameStartingWith("Project");
-        LOG.info("Projects name starting with \"Project\"\n{}", projects);
+        LOG.info("Projects name starting with Project:");
+        projects.forEach((project) -> LOG.info("{}", project));
 
         Iterable<Project> percentSignProjects = projectRepository.findByNameStartingWith("%");
         LOG.info("Projects name starting with \"%\"\n{}", percentSignProjects);
 
         Iterable<Project> allProjects = projectRepository.findByNameStartingWith("");
-        LOG.info("Projects name starting with \"\"\n{}", allProjects);
+        LOG.info("Projects name starting with \"\"");
+        allProjects.forEach((project) -> LOG.info("{}", project));
 
         List<Task> tasksStrictlyDue = taskRepository.findByDueDateGreaterThan(LocalDate.of(2025, 2, 10));
         LOG.info("Number of Tasks due strictly after: \"2025-02-10\"\n{}", tasksStrictlyDue.size());

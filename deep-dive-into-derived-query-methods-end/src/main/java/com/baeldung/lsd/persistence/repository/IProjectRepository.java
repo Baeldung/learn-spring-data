@@ -11,6 +11,8 @@ public interface IProjectRepository extends CrudRepository<Project, Long> {
 
     Iterable<Project> findByNameStartingWith(String name);
 
+    Iterable<Project> findByNameEndingWith(String name);
+
     Iterable<Project> findByNameContaining(String name);
 
     Iterable<Project> findByNameLike(String likePattern);
