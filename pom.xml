@@ -19,6 +19,8 @@
     <module>using-query-with-parameters-end</module>
     <module>named-queries-start</module>
     <module>named-queries-end</module>
+    <module>returning-custom-object-start</module>
+    <module>returning-custom-object-end</module>
   </modules>
 
 </project>
