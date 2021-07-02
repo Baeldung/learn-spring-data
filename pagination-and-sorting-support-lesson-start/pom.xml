@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>Learn Spring Data - Module 4: Pagination and Sorting Support</description>
+    <description>Learn Spring Data - Pagination and Sorting Support - Start</description>
 
     <groupId>com.baeldung</groupId>
     <artifactId>pagination-and-sorting-support-lesson-start</artifactId>
