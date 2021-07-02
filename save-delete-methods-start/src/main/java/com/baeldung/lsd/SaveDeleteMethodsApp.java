@@ -26,5 +26,4 @@ public class SaveDeleteMethodsApp implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
     }
-
 }
