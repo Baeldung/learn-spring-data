@@ -8,8 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.repository.IProjectRepository;
-import com.baeldung.lsd.persistence.repository.ITaskRepository;
+import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
 public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
@@ -17,9 +17,9 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(DeepDiveDerivedQueryMethodsApp.class);
 
     @Autowired
-    private IProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Autowired
-    private ITaskRepository taskRepository;
+    private TaskRepository taskRepository;
     public static void main(final String... args) {
         SpringApplication.run(DeepDiveDerivedQueryMethodsApp.class, args);
     }

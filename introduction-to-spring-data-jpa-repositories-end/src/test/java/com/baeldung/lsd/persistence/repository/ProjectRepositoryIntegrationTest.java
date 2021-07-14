@@ -14,7 +14,7 @@ import com.baeldung.lsd.persistence.model.Project;
 class ProjectRepositoryIntegrationTest {
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Test
     void givenLoadedProjects_whenFindByID_thenSuccess() {

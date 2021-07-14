@@ -12,19 +12,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.IProjectRepository;
-import com.baeldung.lsd.persistence.repository.ITaskRepository;
-import com.baeldung.lsd.persistence.repository.IUserRepository;
+import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
+import com.baeldung.lsd.persistence.repository.UserRepository;
 
 @SpringBootApplication
 public class IntroToJpaRepositoriesApp implements ApplicationRunner {
 
     @Autowired
-    private IProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     @Autowired
-    private IUserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    private ITaskRepository taskRepository;
+    private TaskRepository taskRepository;
     private static final Logger LOG = LoggerFactory.getLogger(IntroToJpaRepositoriesApp.class);
 
     public static void main(final String... args) {

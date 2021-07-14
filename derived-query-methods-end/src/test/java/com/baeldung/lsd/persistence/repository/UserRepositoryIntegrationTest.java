@@ -23,7 +23,7 @@ import com.baeldung.lsd.persistence.model.User;
 class UserRepositoryIntegrationTest {
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Test
     void givenNewUser_whenSaved_thenSuccess() {

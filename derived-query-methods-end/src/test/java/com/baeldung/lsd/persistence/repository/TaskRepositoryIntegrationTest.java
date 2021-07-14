@@ -25,13 +25,13 @@ import com.baeldung.lsd.persistence.model.Task;
 class TaskRepositoryIntegrationTest {
 
     @Autowired
-    ITaskRepository taskRepository;
+    TaskRepository taskRepository;
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
