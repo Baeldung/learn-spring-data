@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
@@ -17,10 +20,10 @@ import com.baeldung.lsd.persistence.model.Task;
 class TaskRepositoryIntegrationTest {
 
     @Autowired
-    ITaskRepository taskRepository;
+    TaskRepository taskRepository;
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -47,5 +50,15 @@ class TaskRepositoryIntegrationTest {
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
+    }
+    
+    @Test
+    void givenProjectTasks_whenFindByProjectId_thenSuccess() {
+        Task task4 = taskRepository.findById(4l).get();
+        
+        Pageable pageable = PageRequest.of(0, 2);
+        Page<Task> retrievedTask = taskRepository.findByProjectId(2l, pageable);
+        
+        assertThat(retrievedTask.getContent()).contains(entityManager.find(Task.class, task4.getId()));
     }
 }

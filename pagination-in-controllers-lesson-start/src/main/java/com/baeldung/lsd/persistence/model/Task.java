@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Task {
     @Id
@@ -29,6 +31,7 @@ public class Task {
 
     private TaskStatus status;
 
+    @JsonBackReference
     @ManyToOne(optional = false)
     private Project project;
 

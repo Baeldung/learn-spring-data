@@ -17,10 +17,10 @@ import com.baeldung.lsd.persistence.model.Task;
 class TaskRepositoryIntegrationTest {
 
     @Autowired
-    ITaskRepository taskRepository;
+    TaskRepository taskRepository;
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -48,4 +48,5 @@ class TaskRepositoryIntegrationTest {
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
     }
+    
 }

@@ -15,7 +15,7 @@ import com.baeldung.lsd.persistence.model.User;
 class UserRepositoryIntegrationTest {
 
     @Autowired
-    IUserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     TestEntityManager entityManager;
