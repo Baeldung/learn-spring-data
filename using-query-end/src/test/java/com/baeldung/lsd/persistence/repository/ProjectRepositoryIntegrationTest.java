@@ -2,6 +2,7 @@ package com.baeldung.lsd.persistence.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import com.baeldung.lsd.persistence.model.Project;
 class ProjectRepositoryIntegrationTest {
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -72,4 +73,30 @@ class ProjectRepositoryIntegrationTest {
         assertThat(entityManager.find(Project.class, newProject.getId())).isNull();
     }
 
+    @Test
+    void givenProjectCreated_whenFindByNameAndDescription_thenSuccess() {
+        Project newProject = new Project("PTEST-3", "Project 3", "About Project 3");
+        entityManager.persist(newProject);
+
+        List<Project> projectList = projectRepository.findWithNameAndDescription();
+
+        assertThat(projectList).contains(newProject);
+    }
+
+    @Test
+    void givenProjectCreated_whenFindSingleProject_thenSuccess() {
+        Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
+        entityManager.persist(newProject);
+
+        Project project = projectRepository.findSingleProject();
+
+        assertThat(project).isNotNull();
+    }
+
+    @Test
+    void givenProjectExists_whenFindNameByCode_thenSuccess() {
+        Optional<String> projectName = projectRepository.findNameByCode();
+
+        projectName.ifPresent((name) -> assertThat(name).isEqualTo("Project 1"));
+    }
 }

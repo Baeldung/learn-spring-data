@@ -3,6 +3,7 @@ package com.baeldung.lsd.persistence.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,10 @@ import com.baeldung.lsd.persistence.model.Task;
 class TaskRepositoryIntegrationTest {
 
     @Autowired
-    ITaskRepository taskRepository;
+    TaskRepository taskRepository;
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -47,5 +48,19 @@ class TaskRepositoryIntegrationTest {
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
+    }
+
+    @Test
+    void givenTasksExist_whenCountByDueYear_thenSuccess() {
+        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
+        projectRepository.save(testProject);
+        Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.of(2020, 1, 1), testProject);
+        taskRepository.save(firstTask);
+        Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.of(2020, 1, 2), testProject);
+        taskRepository.save(secondTask);
+
+        List<List<Integer>> tasksByDueYear = taskRepository.countByDueYear();
+
+        assertThat(tasksByDueYear).contains(List.of(2, 2020));
     }
 }

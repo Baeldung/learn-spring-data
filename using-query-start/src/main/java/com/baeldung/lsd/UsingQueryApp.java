@@ -8,7 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.repository.IProjectRepository;
+import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
 public class UsingQueryApp implements ApplicationRunner {
@@ -16,7 +17,10 @@ public class UsingQueryApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(UsingQueryApp.class);
 
     @Autowired
-    private IProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(UsingQueryApp.class, args);

@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ProjectRepositoryIntegrationTest {
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;

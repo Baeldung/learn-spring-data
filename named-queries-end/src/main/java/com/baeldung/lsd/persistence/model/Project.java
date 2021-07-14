@@ -11,7 +11,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+@NamedQuery(name = "namedQueryProjectsWithIdGreaterThan", query = "select p from Project p where p.id > :id")
+
+@NamedQuery(name = "Project.findProjectsWithIdLessThan", query = "select p from Project p where p.id < :id")
+
+@NamedQuery(name = "Project.updateProjectDescriptionById", query = "update Project set description = :newDescription  where id = :id")
+
+@NamedNativeQuery(name = "Project.findProjectsWithDescriptionShorterThan", query = "select * from Project p where LENGTH(p.description) < :length", resultClass = Project.class)
 
 @Entity
 public class Project {

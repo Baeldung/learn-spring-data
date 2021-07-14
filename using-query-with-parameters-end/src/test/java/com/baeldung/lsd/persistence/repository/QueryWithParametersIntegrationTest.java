@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class QueryWithParametersIntegrationTest {
 
     @Autowired
-    IProjectRepository projectRepository;
+    ProjectRepository projectRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -28,7 +28,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByCodeIn(Set.of("PTEST-1", "PTEST-2"));
+        List<Project> result = projectRepository.findWithCodeIn(Set.of("PTEST-1", "PTEST-2"));
         assertThat(result).contains(newProject1, newProject2);
     }
 
@@ -39,7 +39,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByNameAndDescriptionPositionalBind("Test Project 1", "Description for project PTEST-1");
+        List<Project> result = projectRepository.findWithNameAndDescriptionPositionalBind("Test Project 1", "Description for project PTEST-1");
         assertThat(result).containsOnly(newProject1);
     }
 
@@ -50,7 +50,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByNameAndDescriptionNamedBind("Description for project PTEST-1", "Test Project 1");
+        List<Project> result = projectRepository.findWithNameAndDescriptionNamedBind("Description for project PTEST-1", "Test Project 1");
         assertThat(result).containsOnly(newProject1);
     }
 
@@ -61,7 +61,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByDescriptionIsLike("for");
+        List<Project> result = projectRepository.findWithDescriptionIsLike("for");
         assertThat(result).containsOnly(newProject1, newProject2);
     }
 
@@ -74,7 +74,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject2);
         entityManager.persist(newProject3);
 
-        List<Project> result = projectRepository.findByDescriptionIsShorterThan(6);
+        List<Project> result = projectRepository.findWithDescriptionIsShorterThan(6);
         assertThat(result).containsOnly(newProject2, newProject3);
 
     }
@@ -86,7 +86,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByDescriptionWithPrefixAndSuffix("PRE", "SUFFIX");
+        List<Project> result = projectRepository.findWithDescriptionWithPrefixAndSuffix("PRE", "SUFFIX");
         assertThat(result).containsOnly(newProject1);
     }
 
@@ -97,7 +97,7 @@ class QueryWithParametersIntegrationTest {
         entityManager.persist(newProject1);
         entityManager.persist(newProject2);
 
-        List<Project> result = projectRepository.findByDescriptionWithPrefix("%");
+        List<Project> result = projectRepository.findWithDescriptionWithPrefix("%");
         assertThat(result).hasSize(5);
     }
 }
