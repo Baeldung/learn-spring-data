@@ -69,5 +69,14 @@ class TaskRepositoryIntegrationTest {
 
         assertThat(dbSortedTasks).isSortedAccordingTo(Comparator.comparing(Task::getDueDate, Comparator.nullsLast(Comparator.reverseOrder())));
     }
+    
+    @Test
+    void givenNativeQueryWithOrderBy_whenCalled_thenSuccess() {
+
+        List<Task> dbSortedTasks = taskRepository.allTasksSortedByDueDateDesc();
+        
+        assertThat(dbSortedTasks).isSortedAccordingTo(Comparator.comparing(Task::getDueDate, Comparator.nullsLast(Comparator.reverseOrder())));
+        
+    }
 
 }

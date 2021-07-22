@@ -37,17 +37,21 @@ public class SortingWithQueryApp implements ApplicationRunner {
 
         Sort sortByDueDateDesc = Sort.by(new Sort.Order(Direction.DESC, "dueDate").nullsFirst());
 
-        List<Task> customQueryWithSortParam = taskRepository.allTasks(sortByDueDateDesc);
+        List<Task> customQueryWithSortParamResults = taskRepository.allTasks(sortByDueDateDesc);
 
         LOG.info("All Tasks sorted by due date descending order:");
-        customQueryWithSortParam.forEach(t -> LOG.info("{}", t));
+        customQueryWithSortParamResults.forEach(t -> LOG.info("{}", t));
 
         Sort sortByAsignee = Sort.by(Direction.DESC, "assignee.lastName");
 
-        List<Task> queryWithSort = taskRepository.allTasksSortedByDueDate(sortByAsignee);
+        List<Task> queryWithOrderByAndSortParamResults = taskRepository.allTasksSortedByDueDate(sortByAsignee);
 
         LOG.info("All Tasks sorted by due date descending order and assignee last name in descending order:");
-        queryWithSort.forEach(t -> LOG.info("{}", t));
+        queryWithOrderByAndSortParamResults.forEach(t -> LOG.info("{}", t));
+
+        List<Task> nativeQueryTasksSortedByDueDateDescResults = taskRepository.allTasksSortedByDueDateDesc();
+        LOG.info("All Tasks sorted by due date descending order with native query:");
+        nativeQueryTasksSortedByDueDateDescResults.forEach(t -> LOG.info("{}", t));
 
     }
 

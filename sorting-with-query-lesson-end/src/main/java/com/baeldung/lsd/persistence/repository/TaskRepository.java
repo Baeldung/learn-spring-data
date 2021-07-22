@@ -18,5 +18,8 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     @Query("select t from Task t order by t.dueDate desc")
     List<Task> allTasksSortedByDueDate(Sort sort);
+    
+    @Query(value = "select * from Task t order by t.due_date desc", nativeQuery = true)
+    List<Task> allTasksSortedByDueDateDesc();
 
 }
