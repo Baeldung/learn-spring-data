@@ -43,7 +43,7 @@ public class DeleteMethodsApp implements ApplicationRunner {
         // delete using custom query and with count
         Long deleteCount = projectRepository.deleteByNameContaining("Project 2");
 
-        LOG.info("Quantity of removed projects:\n{}", deleteCount);
+        LOG.info("Number of removed projects:\n{}", deleteCount);
 
         // delete using custom query
         projectRepository.deleteByNameContaining("project");
