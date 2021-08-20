@@ -13,6 +13,10 @@
     <modules>
       <module>building-queries-with-specifications-start</module>
       <module>building-queries-with-specifications-end</module>
+      <module>using-query-by-example-start</module>
+      <module>using-query-by-example-end</module>
+      <module>querydsl-start</module>
+      <module>querydsl-end</module>
     </modules>
 
 </project>
