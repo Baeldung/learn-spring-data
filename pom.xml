@@ -13,6 +13,10 @@
     <modules>
         <module>custom-methods-in-repositories-start</module>
         <module>custom-methods-in-repositories-end</module>
+        <module>spring-data-and-transactions-start</module>
+        <module>spring-data-and-transactions-end</module>
+        <module>domain-events-start</module>
+        <module>domain-events-end</module>
     </modules>
 
 </project>
