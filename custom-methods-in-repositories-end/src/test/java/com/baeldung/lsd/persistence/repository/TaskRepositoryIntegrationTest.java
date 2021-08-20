@@ -3,6 +3,7 @@ package com.baeldung.lsd.persistence.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
+import com.baeldung.lsd.persistence.model.TaskStatus;
 
 @DataJpaTest
 class TaskRepositoryIntegrationTest {
@@ -47,5 +49,38 @@ class TaskRepositoryIntegrationTest {
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
+    }
+
+    @Test
+    void givenTasksCreated_whenSearch_returnMatchingTask() {
+        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
+        projectRepository.save(testProject);
+        Task newTask = new Task("First Test Task", "This is First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
+        taskRepository.save(newTask);
+
+        List<Task> matchingTasks = taskRepository.search("First Task");
+
+        assertThat(matchingTasks).contains(newTask);
+    }
+    @Test
+    void givenTasksCreated_whenFindAll_returnsAllTasksNotDone() {
+        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
+        projectRepository.save(testProject);
+        Task doneTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
+        taskRepository.save(doneTask);
+        Task todoTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testProject, TaskStatus.TO_DO);
+        taskRepository.save(todoTask);
+
+        List<Task> retrievedTask = taskRepository.findAll();
+
+        boolean containsDone = retrievedTask.stream()
+            .anyMatch(task -> task.getStatus()
+                .equals(TaskStatus.DONE));
+        assertThat(containsDone).isFalse();
+
+        boolean containsTodo = retrievedTask.stream()
+            .anyMatch(task -> task.getUuid()
+                .equals(todoTask.getUuid()));
+        assertThat(containsTodo).isTrue();
     }
 }
