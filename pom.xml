@@ -17,6 +17,10 @@
         <module>spring-data-and-transactions-end</module>
         <module>domain-events-start</module>
         <module>domain-events-end</module>
+        <module>auditing-start</module>
+        <module>auditing-end</module>
+        <module>entity-graphs-start</module>
+        <module>entity-graphs-end</module>
     </modules>
 
 </project>
