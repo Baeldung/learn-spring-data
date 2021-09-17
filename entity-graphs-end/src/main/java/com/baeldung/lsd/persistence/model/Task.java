@@ -24,10 +24,10 @@ public class Task {
 
     private TaskStatus status;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User assignee;
 
     public Task() {

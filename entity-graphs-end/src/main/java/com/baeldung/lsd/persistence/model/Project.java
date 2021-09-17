@@ -7,6 +7,20 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@NamedEntityGraph(
+    name = "project-with-tasks", 
+    attributeNodes = { 
+            @NamedAttributeNode(value = "tasks", subgraph = "task-assignee") 
+    }, 
+    subgraphs = { 
+            @NamedSubgraph(
+                name="task-assignee", 
+                attributeNodes = {
+                        @NamedAttributeNode("assignee")
+                }
+            )   
+    }
+)
 public class Project {
 
     @Id
@@ -20,7 +34,7 @@ public class Project {
 
     private String description;
 
-    @OneToMany(mappedBy = "project", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Task> tasks = new HashSet<>();
 
     public Project(String code, String name, String description) {

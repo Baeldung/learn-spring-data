@@ -1,15 +1,21 @@
 package com.baeldung.lsd.persistence.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Optional;
 
+import org.hibernate.LazyInitializationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Task;
 
 @DataJpaTest
 class ProjectRepositoryIntegrationTest {
@@ -18,8 +24,11 @@ class ProjectRepositoryIntegrationTest {
     ProjectRepository projectRepository;
 
     @Autowired
-    TestEntityManager entityManager;
-
+    private TestEntityManager entityManager;
+    
+    @Autowired
+    private TransactionTemplate transactionTemplate;
+    
     @Test
     void givenNewProject_whenSave_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
@@ -70,6 +79,48 @@ class ProjectRepositoryIntegrationTest {
         projectRepository.delete(newProject);
 
         assertThat(entityManager.find(Project.class, newProject.getId())).isNull();
+    }
+    
+    @Test
+    //Disable Transactions since we want to assert outside transaction
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    void givenProjects_whenFindByNameContaining_thenAllFieldsLoad() {
+        
+        //execute within a transaction
+        Iterable<Project> projects = transactionTemplate.execute((status) -> {
+            return projectRepository.findByNameContaining("Test");
+        });
+        
+        //assert outside the transaction, if associations were loaded eagerly 
+        projects.forEach(project -> {
+            assertThat(project)
+                // check if tasks association is loaded eagerly
+                .returns(project.getTasks(), Project::getTasks);
+            // check if task assignee is loaded eagerly
+            project.getTasks().forEach(task -> assertThat(task).returns(task.getAssignee(), Task::getAssignee));
+        });
+
+    }
+    
+    @Test
+    //Disable Transactions since we want to assert outside transaction
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    void givenProjectFoundByIdWithoutEGraphs_whenAccessAssociations_thenLazyException() {
+       
+        //execute within a transaction
+       Optional<Project> projectOpt = transactionTemplate.execute((status) -> {
+         //attempt to load a project(findbyId not using entity graphs)
+            return projectRepository.findById(1l);
+        });
+        
+       // assert outside the transaction, if associations were loaded lazily
+       projectOpt.ifPresent(project -> {
+           // assert lazy initialization exception when tasks association is accessed outside of a transaction
+           assertThatThrownBy(() -> {
+               project.getTasks().isEmpty();
+           }).isInstanceOf(LazyInitializationException.class);
+       });
+
     }
 
 }
