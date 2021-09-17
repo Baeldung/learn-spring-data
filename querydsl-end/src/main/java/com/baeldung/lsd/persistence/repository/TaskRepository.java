@@ -1,8 +1,9 @@
 package com.baeldung.lsd.persistence.repository;
 
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import com.baeldung.lsd.persistence.model.Task;
 
-public interface TaskRepository extends CrudRepository<Task, Long> {
+public interface TaskRepository extends CrudRepository<Task, Long>, QuerydslPredicateExecutor<Task> {
 }

@@ -1,6 +1,7 @@
 package com.baeldung.lsd.persistence.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
@@ -10,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.baeldung.lsd.persistence.model.Project;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 
 @DataJpaTest
 class ProjectRepositoryIntegrationTest {
@@ -70,6 +73,31 @@ class ProjectRepositoryIntegrationTest {
         projectRepository.delete(newProject);
 
         assertThat(entityManager.find(Project.class, newProject.getId())).isNull();
+    }
+
+    @Test
+    void givenProjectExample_whenQueryByExample_thenSuccess() {
+        Project probe = new Project();
+        probe.setName("Project 1");
+
+        Example<Project> projectExample = Example.of(probe);
+        Optional<Project> dbProject = projectRepository.findOne(projectExample);
+
+        assertTrue(dbProject.isPresent());
+        assertThat(dbProject.get()
+            .getName()).isEqualTo("Project 1");
+    }
+
+    @Test
+    void givenProjectExample_whenMatchingStartsWithIgnoreCase_thenSuccess() {
+        Project probe = new Project();
+        probe.setName("project");
+
+        Example<Project> projectExample = Example.of(probe, ExampleMatcher.matching()
+            .withMatcher("name", matcher -> matcher.startsWith()
+                .ignoreCase()));
+
+        assertThat(projectRepository.findAll(projectExample)).hasSize(3);
     }
 
 }
