@@ -54,10 +54,10 @@ class DeleteMethodsIntegrationTest {
 
     @Test
     void givenRegularAppContext_whenDeleteSeveralProjects_thenTotalProjectCountIsReduced() {
-        Project newProject = new Project("TEST-NEW1", "TEST-new Project", "TEST-new project description");
+        Project newProject = new Project("TEST-NEW1", "TEST-new Project1", "TEST-new project1 description");
         newProject = projectRepository.save(newProject);
-        Project newProject2 = new Project("TEST-NEW1", "TEST-new Project", "TEST-new project description");
-        newProject2 = projectRepository.save(newProject);
+        Project newProject2 = new Project("TEST-NEW2", "TEST-new Project2", "TEST-new project2 description");
+        newProject2 = projectRepository.save(newProject2);
         Iterable<Project> projectsToDelete = projectRepository.findAllById(List.of(newProject.getId(), newProject2.getId()));
         long totalCount1 = projectRepository.count();
 
