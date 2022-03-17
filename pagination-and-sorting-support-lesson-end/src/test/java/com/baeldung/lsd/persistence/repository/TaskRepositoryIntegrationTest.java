@@ -25,15 +25,12 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
-
-    @Autowired
     TestEntityManager entityManager;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
         Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        entityManager.persist(testProject);
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
 
         taskRepository.save(newTask);
@@ -43,21 +40,20 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
 
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
-        taskRepository.save(newTask);
+        entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
     }
-    
     @Test
     void givenTasks_whenPaginatedPageOne_thenSuccess() {
         
-        Pageable tasksFirstPage = PageRequest.of(0, 2); 
+        Pageable tasksFirstPage = PageRequest.of(0, 2);
         Page<Task> tasksPage1 = taskRepository.findAll(tasksFirstPage);
         
         assertThat(tasksPage1).isNotNull();
@@ -68,8 +64,8 @@ class TaskRepositoryIntegrationTest {
     @Test
     void givenTasks_whenSortedByNameLastTask_thenSuccess() {
         
-        Task task4 = taskRepository.findById(4l).get();
-        
+        Task task4 = entityManager.find(Task.class, 4L);
+
         Sort sortTaskByName = Sort.by(Direction.ASC, "name");
         Iterable<Task> tasksSorted = taskRepository.findAll(sortTaskByName);
         
@@ -79,10 +75,10 @@ class TaskRepositoryIntegrationTest {
     
     @Test
     void givenTasks_whenSortedByNameAndPaginatedLastPageLastTask_thenSuccess() {
-        
-        Task task1 = taskRepository.findById(1l).get();
-        
-        Pageable sortedTasksLastPage = PageRequest.of(1, 2, Sort.by(Direction.DESC, "name")); 
+
+        Task task1 = entityManager.find(Task.class, 1L);
+
+        Pageable sortedTasksLastPage = PageRequest.of(1, 2, Sort.by(Direction.DESC, "name"));
         Page<Task> tasksPage2 = taskRepository.findAll(sortedTasksLastPage);
         
         assertThat(tasksPage2).isNotNull();

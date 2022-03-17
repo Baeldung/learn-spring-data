@@ -25,15 +25,12 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
-
-    @Autowired
     TestEntityManager entityManager;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
         Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        entityManager.persist(testProject);
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
 
         taskRepository.save(newTask);
@@ -43,11 +40,11 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
 
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
-        taskRepository.save(newTask);
+        entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
@@ -56,10 +53,8 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenSlicedTasksByName_whenHasPrevHasAfter_thenSuccess() {
-        Task taskOne = taskRepository.findById(1l)
-            .get();
-        Task taskTwo = taskRepository.findById(2l)
-            .get();
+        Task taskOne = entityManager.find(Task.class, 1L);
+        Task taskTwo = entityManager.find(Task.class, 2L);
 
         Pageable twoTasksPagination = PageRequest.of(0, 2);
 
@@ -74,16 +69,14 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTasks_whenFindAllByStatusPageOne_thenSucess() {
-        Task taskOne = taskRepository.findById(1l)
-            .get();
-        Task taskTwo = taskRepository.findById(2l)
-            .get();
+        Task taskOne = entityManager.find(Task.class, 1L);
+        Task taskTwo = entityManager.find(Task.class, 2L);
 
         Pageable twoTasksPagination = PageRequest.of(0, 2);
 
         Page<Task> twoTasksAPage = taskRepository.findByStatus(TaskStatus.TO_DO, twoTasksPagination);
 
-        assertThat(twoTasksAPage.getTotalElements()).isEqualTo(4l);
+        assertThat(twoTasksAPage.getTotalElements()).isEqualTo(4L);
         assertThat(twoTasksAPage.getTotalPages()).isEqualTo(2);
         assertThat(twoTasksAPage.getContent()).isNotNull()
             .isNotEmpty()
@@ -92,16 +85,14 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenCustomeQuery_whenFindAllTasksPaginated_thenSuccess() {
-        Task taskThree = taskRepository.findById(3l)
-            .get();
-        Task taskFour = taskRepository.findById(4l)
-            .get();
+        Task taskThree = entityManager.find(Task.class, 3L);
+        Task taskFour = entityManager.find(Task.class, 4L);
 
         Pageable pageTwo = PageRequest.of(1, 2);
 
         Page<Task> allTasksByNamePageTwo = taskRepository.allTasksByName("Task%", pageTwo);
 
-        assertThat(allTasksByNamePageTwo.getTotalElements()).isEqualTo(4l);
+        assertThat(allTasksByNamePageTwo.getTotalElements()).isEqualTo(4L);
         assertThat(allTasksByNamePageTwo.getTotalPages()).isEqualTo(2);
         assertThat(allTasksByNamePageTwo.getContent()).isNotNull()
             .isNotEmpty()
