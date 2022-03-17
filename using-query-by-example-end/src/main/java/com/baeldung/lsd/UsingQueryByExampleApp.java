@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,9 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
 import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
 public class UsingQueryByExampleApp implements ApplicationRunner {

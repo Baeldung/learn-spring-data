@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
 public class UsingQueryByExampleApp implements ApplicationRunner {
@@ -17,6 +18,8 @@ public class UsingQueryByExampleApp implements ApplicationRunner {
 
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(UsingQueryByExampleApp.class, args);
