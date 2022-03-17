@@ -4,13 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baeldung.lsd.persistence.model.User;
 
@@ -34,7 +33,7 @@ class UserRepositoryIntegrationTest {
     @Test
     void givenUserCreated_whenFindById_thenSuccess() {
         User newUser = new User("johnTest2@test.com", "John", "Doe");
-        userRepository.save(newUser);
+        entityManager.persist(newUser);
 
         Optional<User> retrievedUser = userRepository.findById(newUser.getId());
         assertThat(retrievedUser.get()).isEqualTo(entityManager.find(User.class, newUser.getId()));

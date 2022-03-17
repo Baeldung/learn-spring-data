@@ -28,7 +28,8 @@ class ProjectRepositoryIntegrationTest {
     
     @Autowired
     private TransactionTemplate transactionTemplate;
-    
+
+
     @Test
     void givenNewProject_whenSave_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
@@ -80,7 +81,7 @@ class ProjectRepositoryIntegrationTest {
 
         assertThat(entityManager.find(Project.class, newProject.getId())).isNull();
     }
-    
+
     @Test
     //Disable Transactions since we want to assert outside transaction
     @Transactional(propagation = Propagation.NOT_SUPPORTED)

@@ -30,7 +30,7 @@ class TaskRepositoryIntegrationTest {
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
         Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        entityManager.persist(testProject);
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
 
         taskRepository.save(newTask);
@@ -40,11 +40,11 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
 
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
-        taskRepository.save(newTask);
+        entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
@@ -53,10 +53,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTasksCreated_whenSearch_returnMatchingTask() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
         Task newTask = new Task("First Test Task", "This is First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
-        taskRepository.save(newTask);
+        entityManager.persist(newTask);
 
         List<Task> matchingTasks = taskRepository.search("First Task");
 
@@ -64,12 +64,12 @@ class TaskRepositoryIntegrationTest {
     }
     @Test
     void givenTasksCreated_whenFindAll_returnsAllTasksNotDone() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
         Task doneTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
-        taskRepository.save(doneTask);
+        entityManager.persist(doneTask);
         Task todoTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testProject, TaskStatus.TO_DO);
-        taskRepository.save(todoTask);
+        entityManager.persist(todoTask);
 
         List<Task> retrievedTask = taskRepository.findAll();
 
