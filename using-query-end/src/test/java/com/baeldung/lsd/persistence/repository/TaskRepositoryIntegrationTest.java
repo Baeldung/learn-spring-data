@@ -21,15 +21,12 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
-
-    @Autowired
     TestEntityManager entityManager;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
         Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        entityManager.persist(testProject);
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
 
         taskRepository.save(newTask);
@@ -39,25 +36,26 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
+        entityManager.persist(testProject);
 
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
-        taskRepository.save(newTask);
+        entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
         assertThat(retrievedTask.get()).isEqualTo(entityManager.find(Task.class, retrievedTask.get()
             .getId()));
     }
 
+
     @Test
     void givenTasksExist_whenCountByDueYear_thenSuccess() {
         Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        entityManager.persist(testProject);
         Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.of(2020, 1, 1), testProject);
-        taskRepository.save(firstTask);
+        entityManager.persist(firstTask);
         Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.of(2020, 1, 2), testProject);
-        taskRepository.save(secondTask);
+        entityManager.persist(secondTask);
 
         List<List<Integer>> tasksByDueYear = taskRepository.countByDueYear();
 

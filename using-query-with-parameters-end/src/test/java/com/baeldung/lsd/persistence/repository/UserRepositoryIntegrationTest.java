@@ -1,14 +1,15 @@
 package com.baeldung.lsd.persistence.repository;
 
-import com.baeldung.lsd.persistence.model.User;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.baeldung.lsd.persistence.model.User;
 
 @DataJpaTest
 class UserRepositoryIntegrationTest {
@@ -28,7 +29,7 @@ class UserRepositoryIntegrationTest {
     @Test
     void givenUserCreated_whenFindById_thenSuccess() {
         User newUser = new User("johnTest2@test.com", "John", "Doe");
-        userRepository.save(newUser);
+        entityManager.persist(newUser);
 
         Optional<User> retrievedUser = userRepository.findById(newUser.getId());
         assertThat(retrievedUser.get()).isEqualTo(entityManager.find(User.class, newUser.getId()));

@@ -27,7 +27,7 @@ public class ProjectRepositoryIntegrationTest {
     TestEntityManager entityManager;
 
     @Test
-    public void givenNewProject_whenSave_thenSuccess() {
+    void givenNewProject_whenSave_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
 
         Project insertedProject = projectRepository.save(newProject);
@@ -36,7 +36,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenUpdate_thenSuccess() {
+    void givenProjectCreated_whenUpdate_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         entityManager.persist(newProject);
 
@@ -49,7 +49,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindById_thenSuccess() {
+    void givenProjectCreated_whenFindById_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         entityManager.persist(newProject);
 
@@ -58,7 +58,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenFindByNameContaining_thenSuccess() {
+    void givenProjectCreated_whenFindByNameContaining_thenSuccess() {
         Project newProject1 = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         Project newProject2 = new Project("PTEST-2", "Test Project 2", "Description for project PTEST-2");
         entityManager.persist(newProject1);
@@ -69,7 +69,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenProjectCreated_whenDelete_thenSuccess() {
+    void givenProjectCreated_whenDelete_thenSuccess() {
         Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
         entityManager.persist(newProject);
 
@@ -79,7 +79,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenInitialDBState_whenFindClosed_thenSuccess() {
+    void givenInitialDBState_whenFindClosed_thenSuccess() {
         List<ProjectClosed> projects = projectRepository.findClosedByNameContaining("Project 1");
         assertThat(projects).hasSize(1);
         ProjectClosed project = projects.get(0);
@@ -88,7 +88,7 @@ public class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    public void givenIntialDBState_whenFindClassBased_thenSuccess() {
+    void givenIntialDBState_whenFindClassBased_thenSuccess() {
         List<ProjectClass> projects = projectRepository.findClassByNameContaining("Project");
 
         assertThat(projects).hasSize(3);
@@ -97,11 +97,10 @@ public class ProjectRepositoryIntegrationTest {
             assertTrue(p.getName()
                 .contains("Project"));
         });
-
     }
 
     @Test
-    public void givenIntialDBState_whenGetStatistics_thenSuccess() {
+    void givenIntialDBState_whenGetStatistics_thenSuccess() {
         List<ProjectNative> projects = projectRepository.getProjectStatistics();
         projects.sort(Comparator.comparing(ProjectNative::getId));
 
