@@ -1,6 +1,6 @@
-# Module 4 - Pagination and Sorting
+# Pagination and Sorting
 
-This is the codebase for Module 4 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+This is the codebase for Module 'Pagination and Sorting' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
 
 
 
