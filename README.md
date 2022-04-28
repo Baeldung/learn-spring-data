@@ -1,6 +1,6 @@
-# Module 6 - Advanced Features
+# Advanced Features
 
-This is the codebase for the [Learn Spring Data](https://www.baeldung.com/learn-spring-data-course#master-class) course (work in progress). 
+This is the codebase for Module 'Advanced Features' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course) 
 
 ======
 
