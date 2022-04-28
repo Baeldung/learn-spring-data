@@ -1,6 +1,6 @@
-# Module 3 - Spring Data Custom Queries with JPQL and native SQL
+# Spring Data Custom Queries with JPQL and native SQL
 
-This is the codebase for Module 4 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+This is the codebase for Module 'Spring Data Custom Queries with JPQL and native SQL' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
 
 
 ======
