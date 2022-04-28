@@ -1,6 +1,6 @@
-# Module 1 - Getting Started with Spring Data JPA
+# Getting Started with Spring Data JPA
 
-This is the codebase for Module 1 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+This is the codebase for Module 'Getting Started with Spring Data JPA' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
 
 
 ======
