@@ -1,6 +1,6 @@
-# Module 2 - Spring Data Repositories
+# Spring Data Repositories
 
-This is the codebase for Module 2 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+This is the codebase for Module 'Spring Data Repositories' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
 
 
 ======
