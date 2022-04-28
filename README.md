@@ -1,6 +1,6 @@
-# Module 5 - Alternate Querying Methods
+# Alternate Querying Methods
 
-This is the codebase for Module 5 of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
+This is the codebase for Module 'Alternate Querying Methods' of [Learn Spring Data JPA](https://www.baeldung.com/learn-spring-data-jpa-course)
 
 
 
