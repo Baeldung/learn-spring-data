@@ -19,7 +19,7 @@ import com.baeldung.lsd.DeepDiveDerivedQueryMethodsApp;
 import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
-import com.baeldung.lsd.persistence.model.User;
+import com.baeldung.lsd.persistence.model.Worker;
 
 @ExtendWith(SpringExtension.class)
 // avoid running the DerivedQueryMethodsApp#run method
@@ -34,7 +34,7 @@ class TaskRepositoryIntegrationTest {
     ProjectRepository projectRepository;
 
     @Autowired
-    UserRepository userRepository;
+    WorkerRepository workerRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
@@ -102,11 +102,11 @@ class TaskRepositoryIntegrationTest {
         Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
         projectRepository.save(testProject);
 
-        User user = new User("Ben@test.com", "Ben", "Doe");
-        userRepository.save(user);
+        Worker worker = new Worker("Ben@test.com", "Ben", "Doe");
+        workerRepository.save(worker);
 
         Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
-        newTask.setAssignee(user);
+        newTask.setAssignee(worker);
         taskRepository.save(newTask);
 
         List<Task> tasks = taskRepository.findByAssigneeFirstName("Ben");

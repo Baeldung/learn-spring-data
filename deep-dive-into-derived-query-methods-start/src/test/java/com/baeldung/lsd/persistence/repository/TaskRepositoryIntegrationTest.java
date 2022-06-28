@@ -31,7 +31,7 @@ class TaskRepositoryIntegrationTest {
     ProjectRepository projectRepository;
 
     @Autowired
-    UserRepository userRepository;
+    WorkerRepository workerRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {

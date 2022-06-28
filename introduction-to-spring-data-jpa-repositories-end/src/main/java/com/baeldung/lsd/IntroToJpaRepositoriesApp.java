@@ -14,7 +14,7 @@ import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.repository.ProjectRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
-import com.baeldung.lsd.persistence.repository.UserRepository;
+import com.baeldung.lsd.persistence.repository.WorkerRepository;
 
 @SpringBootApplication
 public class IntroToJpaRepositoriesApp implements ApplicationRunner {
@@ -22,7 +22,7 @@ public class IntroToJpaRepositoriesApp implements ApplicationRunner {
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
-    private UserRepository userRepository;
+    private WorkerRepository workerRepository;
     @Autowired
     private TaskRepository taskRepository;
     private static final Logger LOG = LoggerFactory.getLogger(IntroToJpaRepositoriesApp.class);
@@ -39,7 +39,7 @@ public class IntroToJpaRepositoriesApp implements ApplicationRunner {
         Optional<Task> project1 = taskRepository.findById(1L);
         LOG.info("Task by id 1:\n{}", project1);
 
-        long noOfUsers = userRepository.count();
-        LOG.info("Number of users:\n{}", noOfUsers);
+        long noOfWorkers = workerRepository.count();
+        LOG.info("Number of workers:\n{}", noOfWorkers);
     }
 }

@@ -4,7 +4,7 @@ INSERT INTO Project(id, code, name, description) VALUES (3, 'P3', 'Project 3', '
 INSERT INTO Project(id, code, name, description) VALUES (4, 'NEW1', 'new project', 'new project description');
 INSERT INTO Project(id, code, name, description) VALUES (5, 'NEW2', 'another project', 'another project description');
 
-INSERT INTO User(id, email, first_name, last_name) VALUES(1, 'john@test.com', 'John', 'Doe');
+INSERT INTO Worker(id, email, first_name, last_name) VALUES(1, 'john@test.com', 'John', 'Doe');
 
 INSERT INTO Task(id, uuid, name, due_date, description, project_id, status) VALUES (1, uuid(), 'Task 1', '2025-01-12', 'Task 1 Description', 1, 0);
 INSERT INTO Task(id, uuid, name, due_date, description, project_id, status) VALUES (2, uuid(), 'Task 2', '2025-02-10', 'Task 2 Description', 1, 0);
