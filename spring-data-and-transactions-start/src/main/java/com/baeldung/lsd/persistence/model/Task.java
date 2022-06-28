@@ -28,7 +28,7 @@ public class Task {
     private Project project;
 
     @ManyToOne
-    private User assignee;
+    private Worker assignee;
 
     public Task() {
     }
@@ -93,11 +93,11 @@ public class Task {
         this.project = project;
     }
 
-    public User getAssignee() {
+    public Worker getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(User assignee) {
+    public void setAssignee(Worker assignee) {
         this.assignee = assignee;
     }
 
