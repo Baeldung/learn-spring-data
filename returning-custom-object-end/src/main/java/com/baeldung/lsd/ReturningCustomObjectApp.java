@@ -12,10 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.baeldung.lsd.persistence.projection.ProjectClosed;
 import com.baeldung.lsd.persistence.projection.ProjectNative;
-import com.baeldung.lsd.persistence.projection.UserOpen;
+import com.baeldung.lsd.persistence.projection.WorkerOpen;
 import com.baeldung.lsd.persistence.projection.ProjectClass;
 import com.baeldung.lsd.persistence.repository.ProjectRepository;
-import com.baeldung.lsd.persistence.repository.UserRepository;
+import com.baeldung.lsd.persistence.repository.WorkerRepository;
 
 @SpringBootApplication
 public class ReturningCustomObjectApp implements ApplicationRunner {
@@ -26,7 +26,7 @@ public class ReturningCustomObjectApp implements ApplicationRunner {
     private ProjectRepository projectRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private WorkerRepository workerRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(ReturningCustomObjectApp.class, args);
@@ -37,8 +37,8 @@ public class ReturningCustomObjectApp implements ApplicationRunner {
         List<ProjectClosed> closedProjections = projectRepository.findClosedByNameContaining("Project");
         closedProjections.forEach(p -> LOG.info("id: {}, name: {}", p.getId(), p.getName()));
 
-        List<UserOpen> openProjections = userRepository.findByFirstName("John");
-        openProjections.forEach(u -> LOG.info("user: id {}, full name: {}", u.getId(), u.getName()));
+        List<WorkerOpen> openProjections = workerRepository.findByFirstName("John");
+        openProjections.forEach(w -> LOG.info("worker: id {}, full name: {}", w.getId(), w.getName()));
 
         List<ProjectClass> classProjections = projectRepository.findClassByNameContaining("Project");
         classProjections.forEach(p -> LOG.info("project: {}", p));

@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
-import com.baeldung.lsd.persistence.repository.UserRepository;
+import com.baeldung.lsd.persistence.repository.WorkerRepository;
 
 @SpringBootApplication
 public class ModifyingQueriesApp implements ApplicationRunner {
@@ -26,7 +26,7 @@ public class ModifyingQueriesApp implements ApplicationRunner {
     private TaskRepository taskRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private WorkerRepository workerRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(ModifyingQueriesApp.class, args);
@@ -38,7 +38,7 @@ public class ModifyingQueriesApp implements ApplicationRunner {
         int deletedRecords = taskRepository.deleteCompletedTasks();
         LOG.info("Number of Records Deleted :\n {}", deletedRecords);
 
-        userRepository.addActiveColumn();
+        workerRepository.addActiveColumn();
 
         Optional<Task> taskOptional = taskRepository.findById(1L);
         if (taskOptional.isPresent()) {

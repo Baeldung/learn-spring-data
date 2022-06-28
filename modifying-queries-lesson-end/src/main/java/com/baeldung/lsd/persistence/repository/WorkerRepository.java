@@ -4,12 +4,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.baeldung.lsd.persistence.model.User;
+import com.baeldung.lsd.persistence.model.Worker;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface WorkerRepository extends CrudRepository<Worker, Long> {
     
     @Modifying
-    @Query(value = "alter table User add column active int(1) not null default 1", nativeQuery = true)
+    @Query(value = "alter table Worker add column active int(1) not null default 1", nativeQuery = true)
     void addActiveColumn();
 
 }

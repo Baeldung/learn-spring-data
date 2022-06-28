@@ -2,7 +2,7 @@ package com.baeldung.lsd.persistence.projection;
 
 import org.springframework.beans.factory.annotation.Value;
 
-public interface UserOpen {
+public interface WorkerOpen {
     Long getId();
 
     @Value("#{target.firstName} #{target.lastName}")
