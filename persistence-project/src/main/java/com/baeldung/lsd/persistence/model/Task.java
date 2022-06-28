@@ -3,7 +3,6 @@ package com.baeldung.lsd.persistence.model;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,7 @@ public class Task {
     private Long id;
 
     @Column(unique = true, nullable = false, updatable = false)
-    private String uuid = UUID.randomUUID()
-        .toString();
+    private String uuid = UUID.randomUUID().toString();
 
     private String name;
 
@@ -33,7 +31,7 @@ public class Task {
     private Project project;
 
     @ManyToOne
-    private User assignee;
+    private Worker assignee;
 
     public Task() {
     }
@@ -98,11 +96,11 @@ public class Task {
         this.project = project;
     }
 
-    public User getAssignee() {
+    public Worker getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(User assignee) {
+    public void setAssignee(Worker assignee) {
         this.assignee = assignee;
     }
 
