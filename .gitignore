@@ -10,10 +10,6 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-#Intellij
-.idea
-*.iml
-
 # Package Files #
 *.jar
 *.war
@@ -25,7 +21,6 @@
 
 #folders#
 target/
-bin/
 /neoDb*
 /data
 /src/main/webapp/WEB-INF/classes
@@ -38,6 +33,5 @@ hs_err_pid*
 # classpath and project files
 .classpath
 .project
-
-#os files
+.idea/
 .DS_Store
