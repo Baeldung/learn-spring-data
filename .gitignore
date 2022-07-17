@@ -21,7 +21,6 @@
 
 #folders#
 target/
-bin/
 /neoDb*
 /data
 /src/main/webapp/WEB-INF/classes
@@ -34,3 +33,5 @@ hs_err_pid*
 # classpath and project files
 .classpath
 .project
+.idea/
+.DS_Store
