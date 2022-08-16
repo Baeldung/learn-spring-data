@@ -9,7 +9,7 @@ import com.baeldung.lsd.persistence.model.Worker;
 public interface WorkerRepository extends CrudRepository<Worker, Long> {
     
     @Modifying
-    @Query(value = "alter table Worker add column active int(1) not null default 1", nativeQuery = true)
+    @Query(value = "alter table Worker add column active int not null default 1", nativeQuery = true)
     void addActiveColumn();
 
 }
