@@ -2,7 +2,7 @@ package com.baeldung.lsd.persistence.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

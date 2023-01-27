@@ -2,7 +2,7 @@ package com.baeldung.lsd.persistence.model;
 
 import java.util.Objects;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class Worker {
