@@ -2,7 +2,7 @@ package com.baeldung.lsd;
 
 import java.util.Optional;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
