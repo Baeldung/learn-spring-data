@@ -31,12 +31,16 @@
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+            <classifier>jakarta</classifier>
             <scope>provided</scope>
         </dependency>
       
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
+            <version>${querydsl.version}</version>
+            <classifier>jakarta</classifier>
         </dependency>
 
         <!-- test -->
@@ -50,22 +54,6 @@
 
     <build>
         <plugins>
-            <plugin>
-              <groupId>com.mysema.maven</groupId>
-              <artifactId>apt-maven-plugin</artifactId>
-              <version>${apt.maven.plugin.version}</version>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>process</goal>
-                  </goals>
-                  <configuration>
-                    <outputDirectory>target/generated-sources</outputDirectory>
-                    <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                  </configuration>
-                </execution>
-              </executions>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -102,7 +90,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.1</version>
+        <version>3.0.1</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
