@@ -5,11 +5,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.baeldung.lsd.persistence.model.AuditingData;
 import com.baeldung.lsd.persistence.model.Project;
 
 @SpringBootTest
+@DirtiesContext
 class ProjectAuditingDataIntegrationTest {
 
     @Autowired
