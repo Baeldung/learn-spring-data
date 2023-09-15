@@ -7,13 +7,13 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baeldung.lsd.persistence.model.Project;
 import com.baeldung.lsd.persistence.model.Task;
 
-@SpringBootTest
+@DataJpaTest
 @Transactional
 class TaskRepositoryIntegrationTest {
 
