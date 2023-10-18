@@ -67,15 +67,12 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        
-        <!-- https://team.baeldung.com/browse/JAVA-18734 - remove when Boot reaches this version -->
-        <hibernate.version>6.2.0.Final</hibernate.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.5</version>
+        <version>3.1.0</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
