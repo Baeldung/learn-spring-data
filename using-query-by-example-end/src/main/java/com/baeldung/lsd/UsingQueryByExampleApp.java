@@ -14,9 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
@@ -25,7 +25,7 @@ public class UsingQueryByExampleApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(UsingQueryByExampleApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
     @Autowired
     private TaskRepository taskRepository;
 
@@ -35,38 +35,38 @@ public class UsingQueryByExampleApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Project project = new Project();
-        project.setName("Project 1");
+        Campaign campaign = new Campaign();
+        campaign.setName("Campaign 1");
 
-        Example<Project> projectExample = Example.of(project);
-        Optional<Project> found = projectRepository.findOne(projectExample);
+        Example<Campaign> campaignExample = Example.of(campaign);
+        Optional<Campaign> found = campaignRepository.findOne(campaignExample);
         if (found.isPresent()) {
-            LOG.info("Project 1 output: {}", found.get()
+            LOG.info("Campaign 1 output: {}", found.get()
                 .toString());
         }
 
         // case-insensitive
-        Project project2 = new Project();
-        project2.setName("project 2");
+        Campaign campaign2 = new Campaign();
+        campaign2.setName("campaign 2");
         ExampleMatcher caseInsensitiveMatcher = ExampleMatcher.matchingAll()
             .withIgnoreCase();
-        Example<Project> caseInsensitiveExample = Example.of(project2, caseInsensitiveMatcher);
-        Optional<Project> found2 = projectRepository.findOne(caseInsensitiveExample);
+        Example<Campaign> caseInsensitiveExample = Example.of(campaign2, caseInsensitiveMatcher);
+        Optional<Campaign> found2 = campaignRepository.findOne(caseInsensitiveExample);
         if (found2.isPresent())
-            LOG.info("Project 2 output: {}", found2.get()
+            LOG.info("Campaign 2 output: {}", found2.get()
                 .toString());
 
         // custom matching
-        Project probe = new Project();
-        probe.setName("project");
+        Campaign probe = new Campaign();
+        probe.setName("campaign");
 
         ExampleMatcher matchContains = ExampleMatcher.matching()
             .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.startsWith()
                 .ignoreCase());
-        Example<Project> probeExample = Example.of(probe, matchContains);
-        List<Project> projects = projectRepository.findAll(probeExample);
+        Example<Campaign> probeExample = Example.of(probe, matchContains);
+        List<Campaign> campaigns = campaignRepository.findAll(probeExample);
 
-        LOG.info("Project list output: {}", projects);
+        LOG.info("Campaign list output: {}", campaigns);
 
         // custom matching with multiple attributes
         Task taskProbe = new Task();

@@ -1,6 +1,6 @@
 package com.baeldung.lsd.persistence.repository;
 
-import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksByProjectCode;
+import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksByCampaignCode;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksSortedByDueDateDesc;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksWithNameContaining;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksWithStatusEquals;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
 
@@ -32,9 +32,9 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        entityManager.persist(testProject);
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        entityManager.persist(testCampaign);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         taskRepository.save(newTask);
 
@@ -43,10 +43,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
@@ -79,11 +79,11 @@ class TaskRepositoryIntegrationTest {
     }
 
     @Test
-    void givenTasks_whenFindTasksByProjectCode_thenSuccess() {
-        Iterable<Task> dbTasks = taskRepository.findAll(tasksByProjectCode("P2"));
+    void givenTasks_whenFindTasksByCampaignCode_thenSuccess() {
+        Iterable<Task> dbTasks = taskRepository.findAll(tasksByCampaignCode("C2"));
 
-        assertThat(dbTasks).extracting("project.code", String.class)
-            .containsOnly("P2");
+        assertThat(dbTasks).extracting("campaign.code", String.class)
+            .containsOnly("C2");
     }
 
     @Test

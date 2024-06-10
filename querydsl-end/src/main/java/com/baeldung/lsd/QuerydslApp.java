@@ -1,6 +1,6 @@
 package com.baeldung.lsd;
 
-import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksByProjectCode;
+import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksByCampaignCode;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksSortedByDueDateDesc;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksWithNameContaining;
 import static com.baeldung.lsd.persistence.model.predicates.TaskPredicates.tasksWithStatusEquals;
@@ -45,10 +45,10 @@ public class QuerydslApp implements ApplicationRunner {
         LOG.info("All Tasks Sorted By Due Date Desc :");
         tasksDueDateDesc.forEach(t -> LOG.info(t.toString()));
 
-        Iterable<Task> tasksWithProjectCode = taskRepository.findAll(tasksByProjectCode("P2"));
+        Iterable<Task> tasksWithCampaignCode = taskRepository.findAll(tasksByCampaignCode("P2"));
 
-        LOG.info("All Tasks with Project Code :");
-        tasksWithProjectCode.forEach(t -> LOG.info(t.toString()));
+        LOG.info("All Tasks with Campaign Code :");
+        tasksWithCampaignCode.forEach(t -> LOG.info(t.toString()));
 
     }
 

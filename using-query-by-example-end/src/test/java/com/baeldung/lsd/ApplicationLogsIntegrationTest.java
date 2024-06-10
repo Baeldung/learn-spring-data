@@ -20,24 +20,24 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindOneProjectLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindOneCampaignLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project 1 output: Project [id=1, code=P1, name=Project 1, description=Description of Project 1]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign 1 output: Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindOneCaseInsensitiveLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project 2 output: Project [id=2, code=P2, name=Project 2, description=About Project 2]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign 2 output: Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindAllLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project list output: ["
-                + "Project [id=1, code=P1, name=Project 1, description=Description of Project 1], "
-                + "Project [id=2, code=P2, name=Project 2, description=About Project 2], "
-                + "Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign list output: ["
+                + "Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], "
+                + "Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], "
+                + "Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
@@ -45,7 +45,7 @@ class ApplicationLogsIntegrationTest {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Found Task: "
                 + "Task [id=3, name=Task 3, description=Task 3 Description, dueDate=2025-03-16, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

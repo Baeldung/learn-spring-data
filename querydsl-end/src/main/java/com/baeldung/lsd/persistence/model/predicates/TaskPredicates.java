@@ -24,8 +24,8 @@ public final class TaskPredicates {
         return QTask.task.dueDate.desc();
     }
 
-    public static BooleanExpression tasksByProjectCode(String projectCode) {
-        return QTask.task.project.code.eq(projectCode);
+    public static BooleanExpression tasksByCampaignCode(String campaignCode) {
+        return QTask.task.campaign.code.eq(campaignCode);
     }
 
 }

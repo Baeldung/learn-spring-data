@@ -5,14 +5,16 @@ import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
-public class Project {
+public class Campaign {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NaturalId
     @Column(unique = true, nullable = false, updatable = false)
     private String code;
 
@@ -20,16 +22,16 @@ public class Project {
 
     private String description;
 
-    @OneToMany(mappedBy = "project", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "campaign", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Task> tasks = new HashSet<>();
 
-    public Project(String code, String name, String description) {
+    public Campaign(String code, String name, String description) {
         this.code = code;
         this.name = name;
         this.description = description;
     }
 
-    public Project() {
+    public Campaign() {
     }
 
     public Long getId() {
@@ -74,29 +76,20 @@ public class Project {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(code);
+        return Objects.hashCode(getCode());
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Project other = (Project) obj;
-        if (code == null) {
-            if (other.code != null)
-                return false;
-        } else if (!code.equals(other.code))
-            return false;
-        return true;
+        if (this == obj) return true;
+        if (!(obj instanceof Campaign other)) return false;
+
+        return Objects.equals(getCode(), other.getCode());
     }
 
     @Override
     public String toString() {
-        return "Project [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + "]";
+        return "Campaign [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + "]";
     }
 
 }
