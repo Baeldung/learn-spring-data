@@ -8,5 +8,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.baeldung.lsd.persistence.model.Task;
 
 public interface TaskRepository extends CrudRepository<Task, Long>, PagingAndSortingRepository<Task, Long> {
-    Page<Task> findByProjectId(long id, Pageable pageable);
+    Page<Task> findByCampaignId(long id, Pageable pageable);
 }

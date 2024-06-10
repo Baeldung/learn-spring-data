@@ -24,9 +24,9 @@ class ApplicationLogsIntegrationTest {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Page 1 of All Tasks:"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=1, name=Task 1, description=Task 1 Description, dueDate=2025-01-12, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=2, name=Task 2, description=Task 2 Description, dueDate=2025-02-10, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null]"));
     }
 
     @Test
@@ -34,9 +34,9 @@ class ApplicationLogsIntegrationTest {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Page 2 of All Tasks:"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=3, name=Task 3, description=Task 3 Description, dueDate=2025-03-16, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=4, name=Task 4, description=Task 4 Description, dueDate=2025-06-25, status=TO_DO, "
-                + "project=Project [id=2, code=P2, name=Project 2, description=About Project 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
+                + "campaign=Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
     }
 
     @Test
@@ -44,13 +44,13 @@ class ApplicationLogsIntegrationTest {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("All Tasks Sorted By Name in Descending Order:"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=4, name=Task 4, description=Task 4 Description, dueDate=2025-06-25, status=TO_DO, "
-                + "project=Project [id=2, code=P2, name=Project 2, description=About Project 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
+                + "campaign=Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=3, name=Task 3, description=Task 3 Description, dueDate=2025-03-16, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=2, name=Task 2, description=Task 2 Description, dueDate=2025-02-10, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=1, name=Task 1, description=Task 1 Description, dueDate=2025-01-12, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null"));
     }
 
     @Test
@@ -58,9 +58,9 @@ class ApplicationLogsIntegrationTest {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Page 1 of All Tasks Sorted by Name in Descending Order:"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=4, name=Task 4, description=Task 4 Description, dueDate=2025-06-25, status=TO_DO, "
-                + "project=Project [id=2, code=P2, name=Project 2, description=About Project 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
+                + "campaign=Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], assignee=Worker [id=1, email=john@test.com, firstName=John, lastName=Doe]]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=3, name=Task 3, description=Task 3 Description, dueDate=2025-03-16, status=TO_DO, "
-                + "project=Project [id=1, code=P1, name=Project 1, description=Description of Project 1], assignee=null"));
+                + "campaign=Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], assignee=null"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

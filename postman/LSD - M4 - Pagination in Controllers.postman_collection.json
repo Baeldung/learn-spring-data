@@ -6,38 +6,38 @@
 	},
 	"item": [
 		{
-			"name": "Get All Projects",
+			"name": "Get All Campaign",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects",
+					"raw": "http://localhost:8080/campaigns",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects"
+						"campaigns"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get All Tasks for Project 1",
+			"name": "Get All Tasks for Campaign 1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks",
+					"raw": "http://localhost:8080/campaigns/1/tasks",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					]
@@ -46,19 +46,19 @@
 			"response": []
 		},
 		{
-			"name": "Get Page 1 of all Tasks for Project 1",
+			"name": "Get Page 1 of all Tasks for Campaign 1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks?page=0&size=2",
+					"raw": "http://localhost:8080/campaigns/1/tasks?page=0&size=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					],
@@ -77,19 +77,19 @@
 			"response": []
 		},
 		{
-			"name": "Get Page 1 of all Tasks for Project 1 - One-Indexed Params",
+			"name": "Get Page 1 of all Tasks for Campaign 1 - One-Indexed Params",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks?page=1&size=2",
+					"raw": "http://localhost:8080/campaigns/1/tasks?page=1&size=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					],
@@ -108,19 +108,19 @@
 			"response": []
 		},
 		{
-			"name": "Last Page of all Tasks for Project 1",
+			"name": "Last Page of all Tasks for Campaign 1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks?page=5&size=2 ",
+					"raw": "http://localhost:8080/campaigns/1/tasks?page=5&size=2 ",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					],
@@ -139,19 +139,19 @@
 			"response": []
 		},
 		{
-			"name": "Get Page 1 of all Tasks for Project 1 Sorted by DueDate Desc",
+			"name": "Get Page 1 of all Tasks for Campaign 1 Sorted by DueDate Desc",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks?page=1&size=2&sort=dueDate,desc",
+					"raw": "http://localhost:8080/campaigns/1/tasks?page=1&size=2&sort=dueDate,desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					],
@@ -174,19 +174,19 @@
 			"response": []
 		},
 		{
-			"name": "Get Last Page of all Tasks for Project 1 Sorted by DueDate Desc",
+			"name": "Get Last Page of all Tasks for Campaign 1 Sorted by DueDate Desc",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/projects/1/tasks?page=5&size=2&sort=dueDate,desc",
+					"raw": "http://localhost:8080/campaigns/1/tasks?page=5&size=2&sort=dueDate,desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"projects",
+						"campaigns",
 						"1",
 						"tasks"
 					],
