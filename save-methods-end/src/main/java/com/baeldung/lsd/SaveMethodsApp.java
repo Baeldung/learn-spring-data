@@ -12,8 +12,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.model.Task;
 
 @SpringBootApplication
@@ -22,7 +22,7 @@ public class SaveMethodsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SaveMethodsApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(SaveMethodsApp.class, args);
@@ -30,41 +30,41 @@ public class SaveMethodsApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Project newProject = new Project("NEW1", "new project", "new project description");
-        LOG.info("Project id before persisting:\n{}", newProject.getId());
+        Campaign newCampaign = new Campaign("NEW1", "new campaign", "new campaign description");
+        LOG.info("Campaign id before persisting:\n{}", newCampaign.getId());
 
         // save new entity
-        projectRepository.save(newProject);
+        campaignRepository.save(newCampaign);
 
-        LOG.info("Project id after persisting:\n{}", newProject.getId());
+        LOG.info("Campaign id after persisting:\n{}", newCampaign.getId());
 
-        newProject.setName("updated name");
-        Set<Task> newProjectTasks = Set.of(new Task("task name", "task description", LocalDate.of(2025, 1, 1), newProject));
-        newProject.setTasks(newProjectTasks);
+        newCampaign.setName("updated name");
+        Set<Task> newCampaignTasks = Set.of(new Task("task name", "task description", LocalDate.of(2025, 1, 1), newCampaign));
+        newCampaign.setTasks(newCampaignTasks);
 
         // update entity (has id)
-        newProject = projectRepository.save(newProject);
+        newCampaign = campaignRepository.save(newCampaign);
 
-        LOG.info("Child Task after updating:\n{}", newProject.getTasks());
+        LOG.info("Child Task after updating:\n{}", newCampaign.getTasks());
 
-        newProject.setName("updated again");
-        Project p1 = projectRepository.findById(1L)
+        newCampaign.setName("updated again");
+        Campaign p1 = campaignRepository.findById(1L)
             .get();
         Set<Task> differentTasks = Set.of(new Task("different task", "different description", LocalDate.of(2025, 1, 1), p1));
         p1.setTasks(differentTasks);
-        Project newProject2 = new Project("NEW2", "another project", "another project description");
-        Iterable<Project> severalProjects = Arrays.asList(newProject, p1, newProject2);
+        Campaign newCampaign2 = new Campaign("NEW2", "another campaign", "another campaign description");
+        Iterable<Campaign> severalCampaigns = Arrays.asList(newCampaign, p1, newCampaign2);
 
-        // update existing projects and save new ones
-        severalProjects = projectRepository.saveAll(severalProjects);
+        // update existing campaigns and save new ones
+        severalCampaigns = campaignRepository.saveAll(severalCampaigns);
 
-        newProject.setName("updated once more");
-        Project newProject3 = new Project("NEW2", "duplicate code!", "project with constraint violation");
-        severalProjects = Arrays.asList(newProject, newProject3);
+        newCampaign.setName("updated once more");
+        Campaign newCampaign3 = new Campaign("NEW2", "duplicate code!", "campaign with constraint violation");
+        severalCampaigns = Arrays.asList(newCampaign, newCampaign3);
 
         try {
             // triggers a database error
-            projectRepository.saveAll(severalProjects);
+            campaignRepository.saveAll(severalCampaigns);
         } catch (Exception ex) {
             LOG.info("Error saving/updating multiple entities");
         }

@@ -10,8 +10,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
@@ -20,7 +20,7 @@ public class DerivedQueryMethodsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(DerivedQueryMethodsApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
     @Autowired
     private TaskRepository taskRepository;
 
@@ -29,12 +29,12 @@ public class DerivedQueryMethodsApp implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        Optional<Project> project1 = projectRepository.findByCodeEquals("P1");
-        LOG.info("Project with code P1: \n{}", project1);
+    public void run(ApplicationArguments args) {
+        Optional<Campaign> campaign1 = campaignRepository.findByCodeEquals("C1");
+        LOG.info("Campaign with code C1: \n{}", campaign1);
 
-        int projectCount = projectRepository.countByName("Project 1");
-        LOG.info("Number of projects with name 'Project 1':\n{}", projectCount);
+        int campaignCount = campaignRepository.countByName("Campaign 1");
+        LOG.info("Number of campaigns with name 'Campaign 1':\n{}", campaignCount);
     }
 
 }

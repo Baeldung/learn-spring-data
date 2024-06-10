@@ -22,19 +22,19 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindByCodeEqualsLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("where p1_0.code=?"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project with code P1"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("where c1_0.code=?"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign with code C1"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedCountByNameLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("where p1_0.name=?"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Number of projects with name 'Project 1'"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("where c1_0.name=?"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Number of campaigns with name 'Campaign 1'"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {
-        return new Condition<ILoggingEvent>(entry -> (substring == null || (entry.getFormattedMessage() != null && entry.getFormattedMessage()
+        return new Condition<>(entry -> (substring == null || (entry.getFormattedMessage() != null && entry.getFormattedMessage()
             .contains(substring))), String.format("entry with message '%s'", substring));
     }
 }

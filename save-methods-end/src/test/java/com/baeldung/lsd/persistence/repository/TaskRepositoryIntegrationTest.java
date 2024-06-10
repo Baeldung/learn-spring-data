@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 
 @DataJpaTest
@@ -21,19 +21,19 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project newProject = projectRepository.save(new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1"));
-        Task newTask = new Task("First Task", "First Task", LocalDate.now(), newProject);
+        Campaign newCampaign = campaignRepository.save(new Campaign("CTEST-1", "Test Campaign 1", "Description for campaign CTEST-1"));
+        Task newTask = new Task("First Task", "First Task", LocalDate.now(), newCampaign);
         assertThat(taskRepository.save(newTask)).isNotNull();
     }
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project newProject = projectRepository.save(new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1"));
-        Task newTask = new Task("First Task", "First Task", LocalDate.now(), newProject);
+        Campaign newCampaign = campaignRepository.save(new Campaign("CTEST-1", "Test Campaign 1", "Description for campaign CTEST-1"));
+        Task newTask = new Task("First Task", "First Task", LocalDate.now(), newCampaign);
         taskRepository.save(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());

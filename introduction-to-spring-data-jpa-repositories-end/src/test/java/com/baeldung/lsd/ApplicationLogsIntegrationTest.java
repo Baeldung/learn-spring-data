@@ -22,7 +22,7 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindAllLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("All Projects"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("All Campaigns"));
     }
 
     @Test

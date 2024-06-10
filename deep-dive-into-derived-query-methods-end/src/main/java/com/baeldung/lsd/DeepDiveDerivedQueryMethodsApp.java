@@ -11,10 +11,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
@@ -23,7 +23,7 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(DeepDiveDerivedQueryMethodsApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
     @Autowired
     private TaskRepository taskRepository;
 
@@ -32,17 +32,17 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        Iterable<Project> projects = projectRepository.findByNameStartingWith("Project");
-        LOG.info("Projects name starting with Project:");
-        projects.forEach((project) -> LOG.info("{}", project));
+    public void run(ApplicationArguments args) {
+        Iterable<Campaign> campaigns = campaignRepository.findByNameStartingWith("Campaign");
+        LOG.info("Campaigns name starting:");
+        campaigns.forEach(campaign -> LOG.info("{}", campaign));
 
-        Iterable<Project> percentSignProjects = projectRepository.findByNameStartingWith("%");
-        LOG.info("Projects name starting with \"%\"\n{}", percentSignProjects);
+        Iterable<Campaign> percentSignCampaigns = campaignRepository.findByNameStartingWith("%");
+        LOG.info("Campaigns name starting with \"%\"\n{}", percentSignCampaigns);
 
-        Iterable<Project> allProjects = projectRepository.findByNameStartingWith("");
-        LOG.info("Projects name starting with \"\"");
-        allProjects.forEach((project) -> LOG.info("{}", project));
+        Iterable<Campaign> allCampaigns = campaignRepository.findByNameStartingWith("");
+        LOG.info("Campaigns name starting with \"\"");
+        allCampaigns.forEach(campaign -> LOG.info("{}", campaign));
 
         List<Task> tasksStrictlyDue = taskRepository.findByDueDateGreaterThan(LocalDate.of(2025, 2, 10));
         LOG.info("Number of Tasks due strictly after: \"2025-02-10\"\n{}", tasksStrictlyDue.size());
@@ -56,8 +56,8 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
         List<Task> tasksByAssignee = taskRepository.findByAssigneeFirstName("John");
         LOG.info("Tasks assigned to John\n{}", tasksByAssignee);
 
-        Iterable<Project> distinctProjects = projectRepository.findDistinctByTasksNameContaining("Task");
-        LOG.info("Distinct projects with Task name containing \"Task\"\n{}", distinctProjects);
+        Iterable<Campaign> distinctCampaigns = campaignRepository.findDistinctByTasksNameContaining("Task");
+        LOG.info("Distinct campaigns with Task name containing \"Task\"\n{}", distinctCampaigns);
     }
 
 }

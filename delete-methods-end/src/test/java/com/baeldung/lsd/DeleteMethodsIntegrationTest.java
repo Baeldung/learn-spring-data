@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootTest
@@ -18,73 +18,73 @@ import com.baeldung.lsd.persistence.repository.TaskRepository;
 class DeleteMethodsIntegrationTest {
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Autowired
     TaskRepository taskRepository;
 
     @Test
-    void givenRegularAppContext_whenDeleteExistingProjectUsingReference_thenTotalProjectCountIsReduced() {
-        Project newProject = new Project("TEST-NEW1", "TEST-new Project", "TEST-new project description");
-        newProject = projectRepository.save(newProject);
-        long totalCount1 = projectRepository.count();
+    void givenRegularAppContext_whenDeleteExistingCampaignUsingReference_thenTotalCampaignCountIsReduced() {
+        Campaign newCampaign = new Campaign("TEST-NEW1", "TEST-new Campaign", "TEST-new campaign description");
+        newCampaign = campaignRepository.save(newCampaign);
+        long totalCount1 = campaignRepository.count();
 
         // delete using reference
-        projectRepository.delete(newProject);
+        campaignRepository.delete(newCampaign);
 
-        long totalCount2 = projectRepository.count();
+        long totalCount2 = campaignRepository.count();
 
         assertThat(totalCount2).isLessThan(totalCount1);
     }
 
     @Test
-    void givenRegularAppContext_whenDeleteProjectUsingId_thenTotalProjectCountIsReduced() {
-        Project newProject = new Project("TEST-NEW1", "TEST-new Project", "TEST-new project description");
-        newProject = projectRepository.save(newProject);
+    void givenRegularAppContext_whenDeleteCampaignUsingId_thenTotalCampaignCountIsReduced() {
+        Campaign newCampaign = new Campaign("TEST-NEW1", "TEST-new Campaign", "TEST-new campaign description");
+        newCampaign = campaignRepository.save(newCampaign);
 
-        long totalCount1 = projectRepository.count();
+        long totalCount1 = campaignRepository.count();
 
         // delete using id
-        projectRepository.deleteById(newProject.getId());
+        campaignRepository.deleteById(newCampaign.getId());
 
-        long totalCount2 = projectRepository.count();
-
-        assertThat(totalCount2).isLessThan(totalCount1);
-    }
-
-    @Test
-    void givenRegularAppContext_whenDeleteSeveralProjects_thenTotalProjectCountIsReduced() {
-        Project newProject = new Project("TEST-NEW1", "TEST-new Project1", "TEST-new project1 description");
-        newProject = projectRepository.save(newProject);
-        Project newProject2 = new Project("TEST-NEW2", "TEST-new Project2", "TEST-new project2 description");
-        newProject2 = projectRepository.save(newProject2);
-        Iterable<Project> projectsToDelete = projectRepository.findAllById(List.of(newProject.getId(), newProject2.getId()));
-        long totalCount1 = projectRepository.count();
-
-        // delete several projects
-        projectRepository.deleteAll(projectsToDelete);
-
-        long totalCount2 = projectRepository.count();
+        long totalCount2 = campaignRepository.count();
 
         assertThat(totalCount2).isLessThan(totalCount1);
     }
 
     @Test
-    void givenRegularAppContext_whenDeleteByNameNonMatchingProject_thenOutputCountIsZero() {
+    void givenRegularAppContext_whenDeleteSeveralCampaigns_thenTotalCampaignCountIsReduced() {
+        Campaign newCampaign = new Campaign("TEST-NEW1", "TEST-new Campaign1", "TEST-new campaign1 description");
+        newCampaign = campaignRepository.save(newCampaign);
+        Campaign newCampaign2 = new Campaign("TEST-NEW2", "TEST-new Campaign2", "TEST-new campaign2 description");
+        newCampaign2 = campaignRepository.save(newCampaign2);
+        Iterable<Campaign> campaignsToDelete = campaignRepository.findAllById(List.of(newCampaign.getId(), newCampaign2.getId()));
+        long totalCount1 = campaignRepository.count();
+
+        // delete several campaigns
+        campaignRepository.deleteAll(campaignsToDelete);
+
+        long totalCount2 = campaignRepository.count();
+
+        assertThat(totalCount2).isLessThan(totalCount1);
+    }
+
+    @Test
+    void givenRegularAppContext_whenDeleteByNameNonMatchingCampaign_thenOutputCountIsZero() {
         // delete using custom query and with count
-        Long deleteCount = projectRepository.deleteByNameContaining("Non-matching name");
+        Long deleteCount = campaignRepository.deleteByNameContaining("Non-matching name");
 
         assertThat(deleteCount).isZero();
     }
 
     @Test
-    void givenRegularAppContext_whenDeleteByNameMatchingEverything_thenTotalProjectAndTaskCountIsZero() {
+    void givenRegularAppContext_whenDeleteByNameMatchingEverything_thenTotalCampaignAndTaskCountIsZero() {
         // delete using custom query
-        projectRepository.removeByNameContaining("Project");
+        campaignRepository.removeByNameContaining("Campaign");
 
-        long finalProjectCount = projectRepository.count();
+        long finalCampaignCount = campaignRepository.count();
         long finaltaskCount = taskRepository.count();
-        assertThat(finalProjectCount).isZero();
+        assertThat(finalCampaignCount).isZero();
         assertThat(finaltaskCount).isZero();
     }
 }

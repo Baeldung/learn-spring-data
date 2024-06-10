@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.baeldung.lsd.DerivedQueryMethodsApp;
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 
 @ExtendWith(SpringExtension.class)
@@ -28,27 +28,27 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Autowired
     WorkerRepository workerRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         assertThat(taskRepository.save(newTask)).isNotNull();
     }
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());

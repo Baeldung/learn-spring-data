@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.baeldung.lsd.DeepDiveDerivedQueryMethodsApp;
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
 import com.baeldung.lsd.persistence.model.Worker;
@@ -31,27 +31,27 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Autowired
     WorkerRepository workerRepository;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         assertThat(taskRepository.save(newTask)).isNotNull();
     }
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
@@ -60,10 +60,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindByDueDateLessThan_thenHasValue() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(newTask);
 
         List<Task> tasks = taskRepository.findByDueDateLessThan(LocalDate.now()
@@ -73,10 +73,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindByDueDateAfter_thenHasValue() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(newTask);
 
         List<Task> tasks = taskRepository.findByDueDateAfter(LocalDate.now()
@@ -86,10 +86,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindByDueDateBeforeAndStatusEquals_thenHasValue() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject, TaskStatus.TO_DO);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign, TaskStatus.TO_DO);
         taskRepository.save(newTask);
 
         List<Task> tasks = taskRepository.findByDueDateBeforeAndStatusEquals(LocalDate.now()
@@ -99,13 +99,13 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindByAssigneeFirstName_thenHasValue() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
         Worker worker = new Worker("Ben@test.com", "Ben", "Doe");
         workerRepository.save(worker);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         newTask.setAssignee(worker);
         taskRepository.save(newTask);
 
@@ -116,16 +116,16 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void given3TaskCreated_whenFindFirst2By_thenResultsSizeEqualTo2() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(firstTask);
 
-        Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testProject);
+        Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(secondTask);
 
-        Task thirdTask = new Task("Third Test Task", "Third Test Task", LocalDate.now(), testProject);
+        Task thirdTask = new Task("Third Test Task", "Third Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(thirdTask);
 
         List<Task> tasks = taskRepository.findFirst2By();
@@ -135,13 +135,13 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void given2TaskCreated_whenFindFirstBy_thenSingleResult() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 1", "Description for project TTEST-2");
-        projectRepository.save(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 1", "Description for campaign CTEST-2");
+        campaignRepository.save(testCampaign);
 
-        Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task firstTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(firstTask);
 
-        Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testProject);
+        Task secondTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testCampaign);
         taskRepository.save(secondTask);
 
         Task task = taskRepository.findFirstBy();

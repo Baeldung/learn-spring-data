@@ -20,15 +20,15 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedProjectIdBeforePersistingLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedCampaignIdBeforePersistingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project id before persisting:\nnull"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign id before persisting:\nnull"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedProjectIdAfterPersistingLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedCampaignIdAfterPersistingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project id after persisting:\n4"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign id after persisting:\n4"));
     }
 
     @Test

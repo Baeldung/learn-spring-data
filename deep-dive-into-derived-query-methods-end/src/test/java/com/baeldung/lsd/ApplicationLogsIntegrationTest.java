@@ -20,28 +20,28 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindByNameStartingWithProjectLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindByNameStartingWithCampaignLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("p1_0.name like ? escape '\\'"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Projects name starting with Project"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=1, code=P1, name=Project 1"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=2, code=P2, name=Project 2"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=3, code=P3, name=Project 3"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("c1_0.name like ? escape '\\'"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaigns name starting:"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=1, code=C1, name=Campaign 1"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=2, code=C2, name=Campaign 2"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=3, code=C3, name=Campaign 3"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindByNameStartingWithPercentLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Projects name starting with \"%\""));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaigns name starting with \"%\""));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindByNameStartingWithEmptyStringLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Projects name starting with \"\""));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=1, code=P1, name=Project 1, description=Description of Project 1]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=2, code=P2, name=Project 2, description=About Project 2]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project [id=3, code=P3, name=Project 3, description=About Project 3]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaigns name starting with \"\""));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]"));
     }
 
     @Test
@@ -71,7 +71,7 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindDistinctByTasksNameContainingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Distinct projects with Task name containing \"Task\""));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Distinct campaigns with Task name containing \"Task\""));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

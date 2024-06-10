@@ -10,9 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 import com.baeldung.lsd.persistence.repository.WorkerRepository;
 
@@ -20,7 +20,7 @@ import com.baeldung.lsd.persistence.repository.WorkerRepository;
 public class IntroToJpaRepositoriesApp implements ApplicationRunner {
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
     @Autowired
     private WorkerRepository workerRepository;
     @Autowired
@@ -33,11 +33,11 @@ public class IntroToJpaRepositoriesApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Iterable<Project> allProjects = projectRepository.findAll();
-        LOG.info("All Projects:\n{}", allProjects);
+        Iterable<Campaign> allCampaigns = campaignRepository.findAll();
+        LOG.info("All Campaigns:\n{}", allCampaigns);
 
-        Optional<Task> project1 = taskRepository.findById(1L);
-        LOG.info("Task by id 1:\n{}", project1);
+        Optional<Task> campaign1 = taskRepository.findById(1L);
+        LOG.info("Task by id 1:\n{}", campaign1);
 
         long noOfWorkers = workerRepository.count();
         LOG.info("Number of workers:\n{}", noOfWorkers);
