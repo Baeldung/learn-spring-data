@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
 
@@ -28,7 +28,7 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Autowired
     TestEntityManager entityManager;
@@ -38,9 +38,9 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        entityManager.persist(testProject);
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        entityManager.persist(testCampaign);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         taskRepository.save(newTask);
 
@@ -49,10 +49,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
@@ -73,8 +73,8 @@ class TaskRepositoryIntegrationTest {
         dbTasks.forEach( task -> assertThat(task)
             //check the task status is TO_DO
             .returns(TaskStatus.TO_DO, from(Task::getStatus))
-            //check if project association is loaded eagerly
-            .returns(task.getProject(), from(Task::getProject))
+            //check if campaign association is loaded eagerly
+            .returns(task.getCampaign(), from(Task::getCampaign))
             //check if assignee association is loaded eagerly
             .returns(task.getAssignee(), from(Task::getAssignee)));
     }
@@ -92,9 +92,9 @@ class TaskRepositoryIntegrationTest {
         
         //assert outside the transaction, if associations were loaded lazily 
        taskOpt.ifPresent(task -> {
-           // assert lazy initialization exception when project association is accessed
+           // assert lazy initialization exception when campaign association is accessed
            assertThatExceptionOfType(LazyInitializationException.class).isThrownBy(() -> {
-               task.getProject().getName();
+               task.getCampaign().getName();
            });
            // assert lazy initialization exception when assignee association is accessed
            assertThatExceptionOfType(LazyInitializationException.class).isThrownBy(() -> {

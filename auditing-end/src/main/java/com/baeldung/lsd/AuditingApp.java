@@ -8,8 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 
 @SpringBootApplication
 public class AuditingApp implements ApplicationRunner {
@@ -17,7 +17,7 @@ public class AuditingApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(AuditingApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(AuditingApp.class, args);
@@ -25,13 +25,13 @@ public class AuditingApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Project project = new Project("P4", "Audited Project", "This project has auditable fields");
-        project = projectRepository.save(project);
-        LOG.info("New Project Auditing Data:{}", project.getAuditingData());
+        Campaign campaign = new Campaign("P4", "Audited Campaign", "This campaign has auditable fields");
+        campaign = campaignRepository.save(campaign);
+        LOG.info("New Campaign Auditing Data:{}", campaign.getAuditingData());
 
         Thread.sleep(2000);
-        project.setName("Updated Project");
-        project = projectRepository.save(project);
-        LOG.info("Updated Project Auditing Data:{}", project.getAuditingData());
+        campaign.setName("Updated Campaign");
+        campaign = campaignRepository.save(campaign);
+        LOG.info("Updated Campaign Auditing Data:{}", campaign.getAuditingData());
     }
 }

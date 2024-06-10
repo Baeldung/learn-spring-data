@@ -10,9 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
-import com.baeldung.lsd.service.ProjectService;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
+import com.baeldung.lsd.service.CampaignService;
 
 @SpringBootApplication
 public class SpringDataAndTransactionsApp implements ApplicationRunner {
@@ -20,10 +20,10 @@ public class SpringDataAndTransactionsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SpringDataAndTransactionsApp.class);
 
     @Autowired
-    private ProjectService projectService;
+    private CampaignService campaignService;
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(SpringDataAndTransactionsApp.class, args);
@@ -31,18 +31,18 @@ public class SpringDataAndTransactionsApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        Project dbProjectOne = projectRepository.findById(1L)
+        Campaign dbCampaignOne = campaignRepository.findById(1L)
             .get();
 
         try {
-            projectService.endProject(dbProjectOne);
+            campaignService.endCampaign(dbCampaignOne);
         } catch (IOError e) {
             LOG.info("Expected Error thrown");
         }
 
-        projectRepository.findByNameContaining(" - Cont").forEach(project -> {
-            LOG.info("Continuation Project Tasks:\n");
-            project.getTasks().forEach(task -> LOG.info(task.toString()));
+        campaignRepository.findByNameContaining(" - Cont").forEach(campaign -> {
+            LOG.info("Continuation Campaign Tasks:\n");
+            campaign.getTasks().forEach(task -> LOG.info(task.toString()));
         });
             
 

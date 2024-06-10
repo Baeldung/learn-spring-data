@@ -1,6 +1,6 @@
 package com.baeldung.lsd.persistence.repository;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,9 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        entityManager.persist(testProject);
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        entityManager.persist(testCampaign);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         taskRepository.save(newTask);
 
@@ -34,10 +34,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());

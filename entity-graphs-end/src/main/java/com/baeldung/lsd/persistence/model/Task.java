@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 public class Task {
@@ -12,6 +13,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NaturalId
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid = UUID.randomUUID()
         .toString();
@@ -25,7 +27,7 @@ public class Task {
     private TaskStatus status;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Project project;
+    private Campaign campaign;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Worker assignee;
@@ -33,16 +35,16 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, String description, LocalDate dueDate, Project project, TaskStatus status) {
+    public Task(String name, String description, LocalDate dueDate, Campaign campaign, TaskStatus status) {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.status = status;
-        this.project = project;
+        this.campaign = campaign;
     }
 
-    public Task(String name, String description, LocalDate dueDate, Project project) {
-        this(name, description, dueDate, project, TaskStatus.TO_DO);
+    public Task(String name, String description, LocalDate dueDate, Campaign campaign) {
+        this(name, description, dueDate, campaign, TaskStatus.TO_DO);
     }
 
     public Long getId() {
@@ -85,12 +87,12 @@ public class Task {
         this.status = status;
     }
 
-    public Project getProject() {
-        return project;
+    public Campaign getCampaign() {
+        return campaign;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
     public Worker getAssignee() {
@@ -107,29 +109,21 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task [id=" + id + ", name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", status=" + status + ", project=" + project + ", assignee=" + assignee + "]";
+        return "Task [id=" + id + ", name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", status=" + status + ", campaign=" + campaign
+                + ", assignee=" + assignee + "]";
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid);
+        return Objects.hash(getUuid());
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Task other = (Task) obj;
-        if (uuid == null) {
-            if (other.uuid != null)
-                return false;
-        } else if (!uuid.equals(other.uuid))
-            return false;
-        return true;
+        if (this == obj) return true;
+        if (!(obj instanceof Task other)) return false;
+
+        return Objects.equals(getUuid(), other.getUuid());
     }
 
 }

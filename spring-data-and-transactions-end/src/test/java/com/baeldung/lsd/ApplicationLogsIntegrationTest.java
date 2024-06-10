@@ -32,19 +32,19 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedEndProjectLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedEndCampaignLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Creating new transaction with name [com.baeldung.lsd.service.ProjectService.endProject]: "
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Creating new transaction with name [com.baeldung.lsd.service.CampaignService.endCampaign]: "
                 + "PROPAGATION_REQUIRED,ISOLATION_DEFAULT"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Getting transaction for [com.baeldung.lsd.service.ProjectService.endProject]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Getting transaction for [com.baeldung.lsd.service.CampaignService.endCampaign]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Participating in existing transaction"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("insert into project (code,description,name,id) values (?,?,?,default)"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("insert into campaign (code,description,name,id) values (?,?,?,default)"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]"));
 
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.saveAll]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Completing transaction for [com.baeldung.lsd.service.ProjectService.endProject] after exception: java.io.IOError"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Completing transaction for [com.baeldung.lsd.service.CampaignService.endCampaign] after exception: java.io.IOError"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Initiating transaction commit"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Committing JPA transaction on EntityManager [SessionImpl"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Closing JPA EntityManager [SessionImpl"));
@@ -54,13 +54,13 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindByNameContainingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Continuation Project Tasks:"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Continuation Campaign Tasks:"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=2, name=Task 2, description=Task 2 Description, dueDate=2025-02-10, status=TO_DO, "
-                + "project=Project [id=4, code=P1-CONT, name=Project 1 - Cont, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=4, code=C1-CONT, name=Campaign 1 - Cont, description=Description of Campaign 1], assignee=null]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=1, name=Task 1, description=Task 1 Description, dueDate=2025-01-12, status=TO_DO, "
-                + "project=Project [id=4, code=P1-CONT, name=Project 1 - Cont, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=4, code=C1-CONT, name=Campaign 1 - Cont, description=Description of Campaign 1], assignee=null]"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=3, name=Task 3, description=Task 3 Description, dueDate=2025-03-16, status=TO_DO, "
-                + "project=Project [id=4, code=P1-CONT, name=Project 1 - Cont, description=Description of Project 1], assignee=null]"));
+                + "campaign=Campaign [id=4, code=C1-CONT, name=Campaign 1 - Cont, description=Description of Campaign 1], assignee=null]"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
 import com.baeldung.lsd.persistence.model.TaskStatus;
 
@@ -22,16 +22,16 @@ class TaskRepositoryIntegrationTest {
     TaskRepository taskRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    CampaignRepository campaignRepository;
 
     @Autowired
     TestEntityManager entityManager;
 
     @Test
     void givenNewTask_whenSaved_thenSuccess() {
-        Project testProject = new Project("TTEST-1", "Task Test Project 1", "Description for project TTEST-1");
-        entityManager.persist(testProject);
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Campaign testCampaign = new Campaign("CTEST-1", "Task Test Campaign 1", "Description for campaign CTEST-1");
+        entityManager.persist(testCampaign);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
 
         taskRepository.save(newTask);
 
@@ -40,10 +40,10 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTaskCreated_whenFindById_thenSuccess() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
 
-        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject);
+        Task newTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign);
         entityManager.persist(newTask);
 
         Optional<Task> retrievedTask = taskRepository.findById(newTask.getId());
@@ -53,9 +53,9 @@ class TaskRepositoryIntegrationTest {
 
     @Test
     void givenTasksCreated_whenSearch_returnMatchingTask() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
-        Task newTask = new Task("First Test Task", "This is First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
+        Task newTask = new Task("First Test Task", "This is First Test Task", LocalDate.now(), testCampaign, TaskStatus.DONE);
         entityManager.persist(newTask);
 
         List<Task> matchingTasks = taskRepository.search("First Task");
@@ -64,11 +64,11 @@ class TaskRepositoryIntegrationTest {
     }
     @Test
     void givenTasksCreated_whenFindAll_returnsAllTasksNotDone() {
-        Project testProject = new Project("TTEST-2", "Task Test Project 2", "Description for project TTEST-2");
-        entityManager.persist(testProject);
-        Task doneTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testProject, TaskStatus.DONE);
+        Campaign testCampaign = new Campaign("CTEST-2", "Task Test Campaign 2", "Description for campaign CTEST-2");
+        entityManager.persist(testCampaign);
+        Task doneTask = new Task("First Test Task", "First Test Task", LocalDate.now(), testCampaign, TaskStatus.DONE);
         entityManager.persist(doneTask);
-        Task todoTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testProject, TaskStatus.TO_DO);
+        Task todoTask = new Task("Second Test Task", "Second Test Task", LocalDate.now(), testCampaign, TaskStatus.TO_DO);
         entityManager.persist(todoTask);
 
         List<Task> retrievedTask = taskRepository.findAll();

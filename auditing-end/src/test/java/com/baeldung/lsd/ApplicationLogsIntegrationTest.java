@@ -22,8 +22,8 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedAuditingDataLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("New Project Auditing Data:[createdDate="));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Updated Project Auditing Data:[createdDate="));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("New Campaign Auditing Data:[createdDate="));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Updated Campaign Auditing Data:[createdDate="));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

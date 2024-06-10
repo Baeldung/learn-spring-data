@@ -10,6 +10,6 @@ import com.baeldung.lsd.persistence.model.TaskStatus;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
     
-    @EntityGraph(attributePaths = {"assignee", "project"})
+    @EntityGraph(attributePaths = {"assignee", "campaign"})
     List<Task> findByStatus(TaskStatus taskStatus);
 }

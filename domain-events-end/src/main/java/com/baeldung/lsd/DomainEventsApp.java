@@ -10,9 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
@@ -21,7 +21,7 @@ public class DomainEventsApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(DomainEventsApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
     
     @Autowired
     private TaskRepository taskRepository;
@@ -32,9 +32,9 @@ public class DomainEventsApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Project project = projectRepository.findById(1L).get();
+        Campaign campaign = campaignRepository.findById(1L).get();
         
-        taskRepository.save(new Task("Sample Name", "Sample Description", LocalDate.of(2025, 01, 01), project));
+        taskRepository.save(new Task("Sample Name", "Sample Description", LocalDate.of(2025, 01, 01), campaign));
         
     }
 

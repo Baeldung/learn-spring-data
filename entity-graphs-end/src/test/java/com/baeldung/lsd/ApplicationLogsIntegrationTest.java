@@ -22,7 +22,7 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedEntityGraphsLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Tasks for Project with Name"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Tasks for Campaign with Name"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("TODO Task"));
     }
 

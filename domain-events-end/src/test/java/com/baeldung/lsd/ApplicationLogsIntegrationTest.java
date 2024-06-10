@@ -22,7 +22,7 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedDomainEventsLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task(id=5) Updated - Invoke Project Application Service Method to Process the Event"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task(id=5) Updated - Invoke Campaign Application Service Method to Process the Event"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task Domain Events Published!"));
     }
 

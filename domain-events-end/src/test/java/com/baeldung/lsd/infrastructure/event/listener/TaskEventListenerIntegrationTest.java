@@ -12,30 +12,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.baeldung.lsd.domain.task.model.TaskUpdated;
-import com.baeldung.lsd.infrastructure.project.listener.ProjectEventListeners;
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.infrastructure.campaign.listener.CampaignEventListeners;
+import com.baeldung.lsd.persistence.model.Campaign;
 import com.baeldung.lsd.persistence.model.Task;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootTest
 class TaskEventListenerIntegrationTest {
 
     @MockBean
-    private ProjectEventListeners taskEventListener;
+    private CampaignEventListeners taskEventListener;
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     @Autowired
     private TaskRepository taskRepository;
 
     @Test
-    void whenAddTasktoProject_thenDomainEventTriggered() {
-        Project project = projectRepository.findById(1L)
+    void whenAddTasktoCampaign_thenDomainEventTriggered() {
+        Campaign campaign = campaignRepository.findById(1L)
             .get();
 
-        taskRepository.save(new Task("Sample Name", "Sample Description", LocalDate.now(), project));
+        taskRepository.save(new Task("Sample Name", "Sample Description", LocalDate.now(), campaign));
 
         // one time for the startup process, and the second for this test method
         verify(taskEventListener, times(2)).taskUpdatedListener(any(TaskUpdated.class));
