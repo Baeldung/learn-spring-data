@@ -8,7 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 
 @SpringBootApplication
 public class QueryWithParametersApp implements ApplicationRunner {
@@ -16,7 +16,7 @@ public class QueryWithParametersApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(QueryWithParametersApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(QueryWithParametersApp.class, args);

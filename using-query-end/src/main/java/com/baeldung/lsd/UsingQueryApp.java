@@ -12,8 +12,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import com.baeldung.lsd.persistence.repository.TaskRepository;
 
 @SpringBootApplication
@@ -22,7 +22,7 @@ public class UsingQueryApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(UsingQueryApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     @Autowired
     private TaskRepository taskRepository;
@@ -33,19 +33,19 @@ public class UsingQueryApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<Project> projects = projectRepository.findWithNameAndDescription();
-        LOG.info("Project 3:\n{}", projects);
+        List<Campaign> campaigns = campaignRepository.findWithNameAndDescription();
+        LOG.info("Campaign 3:\n{}", campaigns);
 
-        Optional<String> projectName = projectRepository.findNameByCode();
-        projectName.ifPresent(p -> LOG.info("Project Name:\n{}", p));
+        Optional<String> campaignName = campaignRepository.findNameByCode();
+        campaignName.ifPresent(c -> LOG.info("Campaign Name:\n{}", c));
 
         List<List<Integer>> tasksCountByDueYear = taskRepository.countByDueYear();
         LOG.info("Tasks count by due years:\n Count \t year\n{}", tasksCountByDueYear.stream()
             .map(t -> "\t" + t.get(0) + "\t" + t.get(1))
             .collect(Collectors.joining("\n")));
 
-        Project project = projectRepository.findSingleProject();
-        LOG.info("Single Project:\n{}", project);
+        Campaign campaign = campaignRepository.findSingleCampaign();
+        LOG.info("Single Campaign:\n{}", campaign);
     }
 
 }

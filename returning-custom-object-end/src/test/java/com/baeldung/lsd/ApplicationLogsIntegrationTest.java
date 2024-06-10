@@ -22,9 +22,9 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindClosedByNameContainingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 1, name: Project 1"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 2, name: Project 2"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 3, name: Project 3"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 1, name: Campaign 1"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 2, name: Campaign 2"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("id: 3, name: Campaign 3"));
     }
 
     @Test
@@ -36,17 +36,17 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindClassByNameContainingLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project: ProjectSummary [id=1, name=Project 1]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project: ProjectSummary [id=2, name=Project 2]"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project: ProjectSummary [id=3, name=Project 3]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign: CampaignClass [id=1, name=Campaign 1]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign: CampaignClass [id=2, name=Campaign 2]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign: CampaignClass [id=3, name=Campaign 3]"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedGetProjectStatisticsLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedGetCampaignStatisticsLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project statistics: id: 1, name: Project 1, tasks: 3"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project statistics: id: 2, name: Project 2, tasks: 1"));
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("project statistics: id: 3, name: Project 3, tasks: 0"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign statistics: id: 1, name: Campaign 1, tasks: 3"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign statistics: id: 2, name: Campaign 2, tasks: 1"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("campaign statistics: id: 3, name: Campaign 3, tasks: 0"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

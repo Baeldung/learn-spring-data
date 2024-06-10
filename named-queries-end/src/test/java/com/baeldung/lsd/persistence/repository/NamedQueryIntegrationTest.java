@@ -1,6 +1,7 @@
 package com.baeldung.lsd.persistence.repository;
 
-import com.baeldung.lsd.persistence.model.Project;
+import com.baeldung.lsd.persistence.model.Campaign;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -16,51 +17,51 @@ public class NamedQueryIntegrationTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     @Test
-    void givenNewProject_whenFindWithIdLessThan_thenGetExpectResult() {
-        Project newProject = new Project("PTEST-1", "Test Project 1", "Description for project PTEST-1");
+    void givenNewCampaign_whenFindWithIdLessThan_thenGetExpectResult() {
+        Campaign newCampaign = new Campaign("CTEST-1", "Test Campaign 1", "Description for campaign CTEST-1");
 
-        entityManager.persist(newProject);
-        long boundary = newProject.getId() + 1;
-        List<Project> result = projectRepository.findProjectsWithIdLessThan(boundary);
+        entityManager.persist(newCampaign);
+        long boundary = newCampaign.getId() + 1;
+        List<Campaign> result = campaignRepository.findCampaignsWithIdLessThan(boundary);
 
         assertThat(result).isNotEmpty()
-            .allMatch(project -> project.getId() < boundary);
+            .allMatch(campaign -> campaign.getId() < boundary);
     }
 
     @Test
-    void givenProjects_whenFindWithDescPrefix_thenGetExpectResult() {
-        Project newProject = new Project("PTEST-1", "Test Project 1", "Special: Description for project PTEST-1");
-        Project newProject2 = new Project("PTEST-2", "Test Project 2", "------: Description for project PTEST-1");
+    void givenCampaigns_whenFindWithDescPrefix_thenGetExpectResult() {
+        Campaign newCampaign = new Campaign("CTEST-1", "Test Campaign 1", "Special: Description for campaign CTEST-1");
+        Campaign newCampaign2 = new Campaign("CTEST-2", "Test Campaign 2", "------: Description for campaign CTEST-1");
 
-        entityManager.persist(newProject);
-        entityManager.persist(newProject2);
+        entityManager.persist(newCampaign);
+        entityManager.persist(newCampaign2);
 
-        List<Project> result = projectRepository.findProjectsWithDescriptionPrefix("Special:");
-        assertThat(result).contains(newProject).doesNotContain(newProject2);
+        List<Campaign> result = campaignRepository.findCampaignsWithDescriptionPrefix("Special:");
+        assertThat(result).contains(newCampaign).doesNotContain(newCampaign2);
     }
 
     @Test
-    void givenProjects_whenFindDescShorterThan_thenGetExpectResult() {
-        Project newProject = new Project("PTEST-1", "Test Project 1", "1234");
-        Project newProject2 = new Project("PTEST-2", "Test Project 2", "123");
+    void givenCampaigns_whenFindDescShorterThan_thenGetExpectResult() {
+        Campaign newCampaign = new Campaign("CTEST-1", "Test Campaign 1", "1234");
+        Campaign newCampaign2 = new Campaign("CTEST-2", "Test Campaign 2", "123");
 
-        entityManager.persist(newProject);
-        entityManager.persist(newProject2);
-        List<Project> result = projectRepository.findProjectsWithDescriptionShorterThan(4);
-        assertThat(result).contains(newProject2).doesNotContain(newProject);
+        entityManager.persist(newCampaign);
+        entityManager.persist(newCampaign2);
+        List<Campaign> result = campaignRepository.findCampaignsWithDescriptionShorterThan(4);
+        assertThat(result).contains(newCampaign2).doesNotContain(newCampaign);
     }
 
     @Test
-    void givenProjects_whenUpdateDescById_thenGetExpectResult() {
+    void givenCampaigns_whenUpdateDescById_thenGetExpectResult() {
         String updatedDescription = "updated description";
-        Project newProject = new Project("PTEST-1", "Test Project 1", "original description");
-        entityManager.persist(newProject);
-        int result = projectRepository.updateProjectDescriptionById(newProject.getId(), updatedDescription);
+        Campaign newCampaign = new Campaign("CTEST-1", "Test Campaign 1", "original description");
+        entityManager.persist(newCampaign);
+        int result = campaignRepository.updateCampaignDescriptionById(newCampaign.getId(), updatedDescription);
         assertThat(result).isEqualTo(1);
-        assertThat(entityManager.find(Project.class, newProject.getId())
+        assertThat(entityManager.find(Campaign.class, newCampaign.getId())
             .getDescription()).isEqualTo(updatedDescription);
     }
 }

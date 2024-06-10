@@ -22,52 +22,52 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithNameAndDescriptionPositionalBindLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Project 3 using positional parameters:\n"
-                + "[Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaign 3 using positional parameters:\n"
+                + "[Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithNameAndDescriptionNamedBindLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Project 3 using named parameters:\n"
-                + "[Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaign 3 using named parameters:\n"
+                + "[Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithCodeInLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Project 2 and Project 3 using IN clause:\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaign 2 and Campaign 3 using IN clause:\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithDescriptionIsLikeLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Projects containing 'About' using LIKE clause:\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaigns containing 'About' using LIKE clause:\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithDescriptionWithPrefixAndSuffixLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Project 3 using prefix and suffix in LIKE clause:\n"
-                + "[Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaign 3 using prefix and suffix in LIKE clause:\n"
+                + "[Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithDescriptionIsShorterThanLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Projects with short descriptions using Native query:\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find Campaigns with short descriptions using Native query:\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithDescriptionWithPrefixLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find all Projects by passing '%' to LIKE clause:\n"
-                + "[Project [id=1, code=P1, name=Project 1, description=Description of Project 1], "
-                + "Project [id=2, code=P2, name=Project 2, description=About Project 2], "
-                + "Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("find all Campaigns by passing '%' to LIKE clause:\n"
+                + "[Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], "
+                + "Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], "
+                + "Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

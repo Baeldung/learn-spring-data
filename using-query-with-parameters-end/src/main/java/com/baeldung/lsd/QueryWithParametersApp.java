@@ -1,7 +1,7 @@
 package com.baeldung.lsd;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class QueryWithParametersApp implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(QueryWithParametersApp.class);
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(QueryWithParametersApp.class, args);
@@ -27,26 +27,26 @@ public class QueryWithParametersApp implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<Project> projectList1 = projectRepository.findWithNameAndDescriptionPositionalBind("Project 3", "About Project 3");
-        LOG.info("find Project 3 using positional parameters:\n{}", projectList1);
+        List<Campaign> campaignList1 = campaignRepository.findWithNameAndDescriptionPositionalBind("Campaign 3", "About Campaign 3");
+        LOG.info("find Campaign 3 using positional parameters:\n{}", campaignList1);
 
-        List<Project> projectList2 = projectRepository.findWithNameAndDescriptionNamedBind("About Project 3", "Project 3");
-        LOG.info("find Project 3 using named parameters:\n{}", projectList2);
+        List<Campaign> campaignList2 = campaignRepository.findWithNameAndDescriptionNamedBind("About Campaign 3", "Campaign 3");
+        LOG.info("find Campaign 3 using named parameters:\n{}", campaignList2);
 
-        List<Project> projectList3 = projectRepository.findWithCodeIn(Set.of("P2", "P3"));
-        LOG.info("find Project 2 and Project 3 using IN clause:\n{}", projectList3);
+        List<Campaign> campaignList3 = campaignRepository.findWithCodeIn(Set.of("C2", "C3"));
+        LOG.info("find Campaign 2 and Campaign 3 using IN clause:\n{}", campaignList3);
 
-        List<Project> projectList4 = projectRepository.findWithDescriptionIsLike("About");
-        LOG.info("find Projects containing 'About' using LIKE clause:\n{}", projectList4);
+        List<Campaign> campaignList4 = campaignRepository.findWithDescriptionIsLike("About");
+        LOG.info("find Campaigns containing 'About' using LIKE clause:\n{}", campaignList4);
 
-        List<Project> projectList5 = projectRepository.findWithDescriptionWithPrefixAndSuffix("About", "3");
-        LOG.info("find Project 3 using prefix and suffix in LIKE clause:\n{}", projectList5);
+        List<Campaign> campaignList5 = campaignRepository.findWithDescriptionWithPrefixAndSuffix("About", "3");
+        LOG.info("find Campaign 3 using prefix and suffix in LIKE clause:\n{}", campaignList5);
 
-        List<Project> projectList6 = projectRepository.findWithDescriptionIsShorterThan(16);
-        LOG.info("find Projects with short descriptions using Native query:\n{}", projectList6);
+        List<Campaign> campaignList6 = campaignRepository.findWithDescriptionIsShorterThan(17);
+        LOG.info("find Campaigns with short descriptions using Native query:\n{}", campaignList6);
 
-        List<Project> projectList7 = projectRepository.findWithDescriptionWithPrefix("%");
-        LOG.info("find all Projects by passing '%' to LIKE clause:\n{}", projectList7);
+        List<Campaign> campaignList7 = campaignRepository.findWithDescriptionWithPrefix("%");
+        LOG.info("find all Campaigns by passing '%' to LIKE clause:\n{}", campaignList7);
 
     }
 

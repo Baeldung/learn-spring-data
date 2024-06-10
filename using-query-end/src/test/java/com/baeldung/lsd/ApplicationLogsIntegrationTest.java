@@ -22,13 +22,13 @@ class ApplicationLogsIntegrationTest {
     @Test
     void whenApplicationIsStarted_thenExpectedFindWithNameAndDescriptionLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project 3:\n[Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign 3:\n[Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
     void whenApplicationIsStarted_thenExpectedFindNameByCodeLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Project Name:\nProject 1"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Campaign Name:\nCampaign 1"));
     }
 
     @Test
@@ -38,9 +38,9 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindSingleProjectLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindSingleCampaignLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Single Project:\nProject [id=1, code=P1, name=Project 1, description=Description of Project 1]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Single Campaign:\nCampaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1]"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {

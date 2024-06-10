@@ -1,7 +1,7 @@
 package com.baeldung.lsd;
 
-import com.baeldung.lsd.persistence.model.Project;
-import com.baeldung.lsd.persistence.repository.ProjectRepository;
+import com.baeldung.lsd.persistence.model.Campaign;
+import com.baeldung.lsd.persistence.repository.CampaignRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class NamedQueriesApp implements ApplicationRunner {
     EntityManager entityManager;
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private CampaignRepository campaignRepository;
 
     public static void main(final String... args) {
         SpringApplication.run(NamedQueriesApp.class, args);
@@ -33,24 +33,24 @@ public class NamedQueriesApp implements ApplicationRunner {
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
 
-        List<Project> projectsWithIdGt1 = entityManager.createNamedQuery("namedQueryProjectsWithIdGreaterThan", Project.class)
+        List<Campaign> campaignsWithIdGt1 = entityManager.createNamedQuery("namedQueryCampaignsWithIdGreaterThan", Campaign.class)
             .setParameter("id", 1L)
             .getResultList();
-        LOG.info("Find Projects with Id greater than 1 using EntityManager:\n{}", projectsWithIdGt1);
+        LOG.info("Find Campaigns with Id greater than 1 using EntityManager:\n{}", campaignsWithIdGt1);
 
-        List<Project> projectsWithIdLt3 = projectRepository.findProjectsWithIdLessThan(3L);
-        LOG.info("Find Projects with Id less than 3:\n{}", projectsWithIdLt3);
+        List<Campaign> campaignsWithIdLt3 = campaignRepository.findCampaignsWithIdLessThan(3L);
+        LOG.info("Find Campaigns with Id less than 3:\n{}", campaignsWithIdLt3);
 
-        projectRepository.updateProjectDescriptionById(1L, "New description updated by named query");
-        Project project1 = projectRepository.findById(1L)
+        campaignRepository.updateCampaignDescriptionById(1L, "New description updated by named query");
+        Campaign campaign1 = campaignRepository.findById(1L)
             .get();
-        LOG.info("After updating the description of the Project(id=1):\n{}", project1);
+        LOG.info("After updating the description of the Campaign(id=1):\n{}", campaign1);
 
-        List<Project> projectsWithShortDescription = projectRepository.findProjectsWithDescriptionShorterThan(16);
-        LOG.info("Find Projects with description shorter than 16:\n{}", projectsWithShortDescription);
+        List<Campaign> campaignsWithShortDescription = campaignRepository.findCampaignsWithDescriptionShorterThan(17);
+        LOG.info("Find Campaigns with description shorter than 17:\n{}", campaignsWithShortDescription);
 
-        List<Project> projectsWithDescriptionPrefix = projectRepository.findProjectsWithDescriptionPrefix("About");
-        LOG.info("Find Projects with Description Prefix (NamedQuery from properties file):\n{}", projectsWithDescriptionPrefix);
+        List<Campaign> campaignsWithDescriptionPrefixes = campaignRepository.findCampaignsWithDescriptionPrefix("About");
+        LOG.info("Find Campaigns with Description Prefix (NamedQuery from properties file):\n{}", campaignsWithDescriptionPrefixes);
 
     }
 

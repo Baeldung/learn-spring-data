@@ -20,42 +20,42 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedNamedQueryProjectsWithIdGreaterThanLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedNamedQueryCampaignsWithIdGreaterThanLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Projects with Id greater than 1 using EntityManager:\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], "
-                + "Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Campaigns with Id greater than 1 using EntityManager:\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], "
+                + "Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindProjectsWithIdLessThanLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindCampaignsWithIdLessThanLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Projects with Id less than 3:\n"
-                + "[Project [id=1, code=P1, name=Project 1, description=Description of Project 1], "
-                + "Project [id=2, code=P2, name=Project 2, description=About Project 2]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Campaigns with Id less than 3:\n"
+                + "[Campaign [id=1, code=C1, name=Campaign 1, description=Description of Campaign 1], "
+                + "Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2]]"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedUpdateProjectDescriptionByIdLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedUpdateCampaignDescriptionByIdLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("After updating the description of the Project(id=1):\n"
-                + "Project [id=1, code=P1, name=Project 1, description=New description updated by named query]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("After updating the description of the Campaign(id=1):\n"
+                + "Campaign [id=1, code=C1, name=Campaign 1, description=New description updated by named query]"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindProjectsWithDescriptionShorterThanLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindCampaignsWithDescriptionShorterThanLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Projects with description shorter than 16:\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], "
-                + "Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Campaigns with description shorter than 17:\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], "
+                + "Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindProjectsWithDescriptionPrefixLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindCampaignsWithDescriptionPrefixLogs() throws InterruptedException {
         Thread.sleep(500);
-        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Projects with Description Prefix (NamedQuery from properties file):\n"
-                + "[Project [id=2, code=P2, name=Project 2, description=About Project 2], "
-                + "Project [id=3, code=P3, name=Project 3, description=About Project 3]]"));
+        assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Find Campaigns with Description Prefix (NamedQuery from properties file):\n"
+                + "[Campaign [id=2, code=C2, name=Campaign 2, description=About Campaign 2], "
+                + "Campaign [id=3, code=C3, name=Campaign 3, description=About Campaign 3]]"));
     }
 
     private Condition<ILoggingEvent> eventContains(String substring) {
