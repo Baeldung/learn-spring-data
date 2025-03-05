@@ -46,6 +46,10 @@ public class DataPaginationApp implements ApplicationRunner {
         
         LOG.info("Are there Slices Prior :\n {}", twoTasksASlice.hasPrevious());
         LOG.info("Are there Slices After :\n {}", twoTasksASlice.hasNext());
+        
+        Slice<Task> nextTasks = taskRepository.findByNameLike("Task%", twoTasksPagination.next());
+
+        LOG.info("Tasks in next page :\n {}", nextTasks.getContent());
 
         Pageable pageTwo = PageRequest.of(1, 2);
 
