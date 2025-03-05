@@ -1,7 +1,6 @@
 package com.baeldung.lsd.infrastructure.event.listener;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.baeldung.lsd.domain.task.model.TaskUpdated;
 import com.baeldung.lsd.infrastructure.campaign.listener.CampaignEventListeners;
@@ -21,7 +20,7 @@ import com.baeldung.lsd.persistence.repository.TaskRepository;
 @SpringBootTest
 class TaskEventListenerIntegrationTest {
 
-    @MockBean
+    @MockitoBean
     private CampaignEventListeners taskEventListener;
 
     @Autowired
@@ -37,8 +36,7 @@ class TaskEventListenerIntegrationTest {
 
         taskRepository.save(new Task("Sample Name", "Sample Description", LocalDate.now(), campaign));
 
-        // one time for the startup process, and the second for this test method
-        verify(taskEventListener, times(2)).taskUpdatedListener(any(TaskUpdated.class));
+        verify(taskEventListener).taskUpdatedListener(any(TaskUpdated.class));
     }
 
 }
