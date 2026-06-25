@@ -45,7 +45,7 @@ public class QuerydslApp implements ApplicationRunner {
         LOG.info("All Tasks Sorted By Due Date Desc :");
         tasksDueDateDesc.forEach(t -> LOG.info(t.toString()));
 
-        Iterable<Task> tasksWithCampaignCode = taskRepository.findAll(tasksByCampaignCode("P2"));
+        Iterable<Task> tasksWithCampaignCode = taskRepository.findAll(tasksByCampaignCode("C2"));
 
         LOG.info("All Tasks with Campaign Code :");
         tasksWithCampaignCode.forEach(t -> LOG.info(t.toString()));
