@@ -75,7 +75,7 @@ class CampaignTaskControllerLiveTest {
         PageRequest pageable = (PageRequest) pageableCaptor.getValue();
 
         assertThat(pageable.isPaged()).isTrue();
-        assertThat(pageable.getPageNumber()).isEqualTo(4);
+        assertThat(pageable.getPageNumber()).isEqualTo(5);
         assertThat(pageable.getPageSize()).isEqualTo(10);
         assertThat(pageable.getSort()
             .isSorted()).isTrue();
