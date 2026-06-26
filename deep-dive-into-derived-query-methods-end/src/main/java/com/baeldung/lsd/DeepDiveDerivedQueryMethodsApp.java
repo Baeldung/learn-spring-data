@@ -50,7 +50,7 @@ public class DeepDiveDerivedQueryMethodsApp implements ApplicationRunner {
         List<Task> tasksDue = taskRepository.findByDueDateGreaterThanEqual(LocalDate.of(2025, 2, 10));
         LOG.info("Number of Tasks due after: \"2025-02-10\"\n{}", tasksDue.size());
 
-        List<Task> overdueTasks = taskRepository.findByDueDateBeforeAndStatusEquals(LocalDate.now(), TaskStatus.TO_DO);
+        List<Task> overdueTasks = taskRepository.findByDueDateBeforeAndStatusEquals(LocalDate.of(2025, 1, 1), TaskStatus.TO_DO);
         LOG.info("Overdue Tasks:\n{}", overdueTasks);
 
         List<Task> tasksByAssignee = taskRepository.findByAssigneeFirstName("John");
