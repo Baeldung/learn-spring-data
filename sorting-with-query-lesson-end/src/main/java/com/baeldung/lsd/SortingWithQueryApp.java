@@ -35,7 +35,7 @@ public class SortingWithQueryApp implements ApplicationRunner {
         LOG.info("All Tasks sorted by due date descending order :");
         customQueryResults.forEach(t -> LOG.info("{}", t));
 
-        Sort sortByDueDateDesc = Sort.by(new Sort.Order(Direction.DESC, "dueDate").nullsFirst());
+        Sort sortByDueDateDesc = Sort.by(Direction.DESC, "dueDate");
 
         List<Task> customQueryWithSortParamResults = taskRepository.allTasks(sortByDueDateDesc);
 
