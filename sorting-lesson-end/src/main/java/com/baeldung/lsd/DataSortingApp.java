@@ -41,12 +41,12 @@ public class DataSortingApp implements ApplicationRunner {
         LOG.info("All tasks ordered by due date in descending order and assignee last name in Ascending order :");
         tasksSortedByMultipleProps.forEach(t -> LOG.info("{}", t));
 
-        Sort sortByDueDateAssigneLastName = Sort.by(Direction.DESC, "dueDate")
+        Sort sortByDueDateAssigneeLastName = Sort.by(Direction.DESC, "dueDate")
             .and(Sort.by(Direction.ASC, "assignee.lastName"));
 
-        List<Task> tasksSortedByDueDateAssigneLastName = taskRepository.findByNameContaining("Task", sortByDueDateAssigneLastName);
+        List<Task> tasksSortedByDueDateAssigneeLastName = taskRepository.findByNameContaining("Task", sortByDueDateAssigneeLastName);
         LOG.info("All tasks ordered by due date in descending order and assignee last name in Ascending order using Sort Parameter :");
-        tasksSortedByDueDateAssigneLastName.forEach(t -> LOG.info("{}", t));
+        tasksSortedByDueDateAssigneeLastName.forEach(t -> LOG.info("{}", t));
 
         TypedSort<Task> taskTypedSort = Sort.sort(Task.class);
 

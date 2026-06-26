@@ -44,7 +44,7 @@ class ApplicationLogsIntegrationTest {
     }
 
     @Test
-    void whenApplicationIsStarted_thenExpectedFindByNameContainingAndSortByDueDateAssigneLastNameLogs() throws InterruptedException {
+    void whenApplicationIsStarted_thenExpectedFindByNameContainingAndSortByDueDateAssigneeLastNameLogs() throws InterruptedException {
         Thread.sleep(500);
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("All tasks ordered by due date in descending order and assignee last name in Ascending order using Sort Parameter :"));
         assertThat(LoggerListAppender.getEvents()).haveAtLeastOne(eventContains("Task [id=4, name=Task 4, description=Task 4 Description, dueDate=2025-06-25, status=TO_DO, "
